@@ -1,39 +1,21 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import "./styles.css";
+import Navbar from "./components/Navbar";
+import Homepage from "./components/Homepage";
+import Trackerpage from "./components/Trackerpage";
+import Jobpage from "./components/Jobpage";
+import Preferencespage from "./components/Preferencespage";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
-    <>
-      <div>
-        <h4>Ollie branch test</h4>
-        <h4>Oisin branch test</h4>
-        <button>TEST152552</button>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-        I am Ready
-      </p>
-    </>
+    <div className="App container">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/tracker" element={<Trackerpage />} />
+        <Route path="/jobs" element={<Jobpage />} />
+        <Route path="/preferences" element={<Preferencespage />} />
+      </Routes>
+    </div>
   );
 }
-
-export default App;
