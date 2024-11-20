@@ -1,9 +1,8 @@
 import "../styles.css";
-
-export default function Homepage() {
+export default function Jobpage() {
   return (
     <div>
-      <h1>HOME PAGE</h1>
+      <h1>JOB PAGE</h1>
     </div>
   );
 }
