@@ -1,20 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Link } from 'react-router-dom'
+import "./styles.css";
+import Navbar from "./components/Navbar";
+import Homepage from "./components/Homepage";
+import Trackerpage from "./components/Trackerpage";
+import Jobpage from "./components/Jobpage";
+import Preferencespage from "./components/Preferencespage";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <Link to="/all-jobs">Go to All Jobs</Link>
-      </div>
-      <div>This is the welcome page</div>
-    </>
-  )
+    <div className="App container">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/tracker" element={<Trackerpage />} />
+        <Route path="/jobs" element={<Jobpage />} />
+        <Route path="/preferences" element={<Preferencespage />} />
+      </Routes>
+    </div>
+  );
 }
-
-export default App
