@@ -6,6 +6,7 @@ export default function JobPagination() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
+  const [totalPages] = useState(30);
 
   useEffect(() => {
     const fetchPage = async (pageNumber) => {
@@ -36,7 +37,8 @@ export default function JobPagination() {
   const getNextPage = () => setPage((prev) => prev + 1);
   const getPrevPage = () => setPage((prev) => (prev > 1 ? prev - 1 : 1));
   const getFirstPage = () => setPage(1);
-  const getLastPage = () => setPage();
+  const getLastPage = () => setPage(totalPages);
+  const setCurrentPage = (pageNumber) => setPage(pageNumber);
 
   return (
     <div>
@@ -60,7 +62,7 @@ export default function JobPagination() {
           <Pagination.Item>{4}</Pagination.Item>
           <Pagination.Ellipsis />
           <Pagination.Next onClick={getNextPage} />
-          <Pagination.Last />
+          <Pagination.Last onClick={getLastPage} />
         </Pagination>
       </div>
     </div>
