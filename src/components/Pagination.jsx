@@ -83,6 +83,9 @@ export default function JobPagination() {
           <Pagination.Last onClick={getLastPage} />
         </Pagination>
       </div>
+      <div>
+        Page {page} of {totalPages}
+      </div>
     </div>
   );
 }
