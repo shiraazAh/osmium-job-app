@@ -1,4 +1,19 @@
 .App {
-  font-family: sans-serif;
-  text-align: center;
+  font-family: 'Inter', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/***** Basic ****/
+h1, h2, h3, h4 ,h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/***** Navbar *****/
+.navbar-container {
+  height: 50px;
+  /* margin-top: 25px; */
+}
+
+/***** Bottom Bar *****/
+.bottom-bar {
+
 }
