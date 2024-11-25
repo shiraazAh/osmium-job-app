@@ -66,7 +66,9 @@ export default function JobPagination() {
       {error && <p>{error}</p>}
       <ul>
         {data.map((job) => (
-          <li key={job.id}>{job.name}</li>
+          <div>
+            <li key={job.id}>{job.name}</li>
+          </div>
         ))}
       </ul>
 
