@@ -1,32 +1,44 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import React, { useState } from "react";
+import { Button, Modal } from "antd";
 
 export default function ConfirmModal() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleConfirm = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
-      <Button variant="danger" onClick={handleShow}>
-        Delete Job
+      <Button
+        type="primary"
+        onClick={showModal}
+        style={{
+          background: "radial-gradient(circle at center, #54A0FF, #3081D0)",
+          border: "none",
+          color: "white",
+        }}
+      >
+        Delete
       </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this job</Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Confirm Delete
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-        </Modal.Footer>
+      <Modal
+        title="Confirm Delete"
+        open={isModalOpen}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+        confirmText="Confirm"
+        okButtonProps={{
+          style: {
+            background: "radial-gradient(circle at center, #54A0FF, #3081D0)",
+          },
+        }}
+      >
+        <p>Are you sure you want to delete this item</p>
       </Modal>
     </>
   );
