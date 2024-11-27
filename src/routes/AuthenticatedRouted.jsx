@@ -27,12 +27,12 @@ export default function AuthenticatedRoutes() {
         </Routes>
       </Layout>
       {/*** Temporary ****/}
-      <div
+      {/* <div
         className="position-fixed bottom-0 text-center w-100 shadow-lg d-flex align-items-center justify-content-center"
         style={{ height: "70px" }}
       >
         This is the bottom bar
-      </div>
+      </div> */}
     </>
   );
 }

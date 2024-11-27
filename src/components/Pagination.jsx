@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Pagination from "react-bootstrap/Pagination";
+import { Pagination, List } from "antd";
+import "../styles.css";
 
 export default function JobPagination() {
   const [data, setData] = useState([]);
@@ -7,6 +8,7 @@ export default function JobPagination() {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages] = useState(30);
+  const [totalItems] = useState(600); // 30 pages * 20 items per page
 
   useEffect(() => {
     const fetchPage = async (pageNumber) => {
@@ -34,58 +36,47 @@ export default function JobPagination() {
     fetchPage(page);
   }, [page]);
 
-  const getNextPage = () => setPage((prev) => prev + 1);
-  const getPrevPage = () => setPage((prev) => (prev > 1 ? prev - 1 : 1));
-  const getFirstPage = () => setPage(1);
-  const getLastPage = () => setPage(totalPages);
-
-  const getPageNumbers = () => {
-    const numbersToShow = [];
-    const numOfPagesViewable = 5;
-    if (page <= 3) {
-      for (let i = 1; i <= numOfPagesViewable; i++) {
-        numbersToShow.push(i);
-      }
-    } else if (page >= totalPages - 2) {
-      for (let i = totalPages - 4; i <= totalPages; i++) {
-        numbersToShow.push(i);
-      }
-    } else {
-      for (let i = page - 2; i <= page + 2; i++) {
-        numbersToShow.push(i);
-      }
-    }
-    return numbersToShow;
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: 20 }}>
       <h1>Jobs</h1>
 
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      <ul>
-        {data.map((job) => (
-          <div>
-            <li key={job.id}>{job.name}</li>
-          </div>
-        ))}
-      </ul>
 
-      <div className="d-flex justify-content-center">
-        <Pagination>
-          <Pagination.First onClick={getFirstPage} />
-          <Pagination.Prev onClick={getPrevPage} />
-          {getPageNumbers().map((pageNum) => (
-            <Pagination.Item key={pageNum} onClick={() => setPage(pageNum)}>
-              {pageNum}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next onClick={getNextPage} />
-          <Pagination.Last onClick={getLastPage} />
-        </Pagination>
+      <List
+        loading={isLoading}
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={(job) => <List.Item key={job.id}>{job.name}</List.Item>}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 20,
+          alignItems: "center",
+        }}
+      >
+        <Pagination
+          current={page}
+          total={totalItems}
+          pageSize={20}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+          // showQuickJumper
+        />
       </div>
-      <div>
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: 10,
+        }}
+      >
         Page {page} of {totalPages}
       </div>
     </div>
