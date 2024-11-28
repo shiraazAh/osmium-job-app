@@ -14,10 +14,14 @@ export default function CustomNavbar() {
         style={{ zIndex: "-1" }}
         className="position-absolute w-100 start-0 top-0 "
       />
-      <p className="m-0 text-white" style={{padding: "0 20px"}}>Hello Person, Good Day <img className="mb-1" src={WavingHand} width={20} alt="waving hand" /></p>
+      <p className="m-0 text-white" style={{ padding: "0 20px" }}>
+        Hello Person, Good Day{" "}
+        <img className="mb-1" src={WavingHand} width={20} alt="waving hand" />
+      </p>
       <Button
         type="default"
         className="bg-transparent border-0"
+        style={{ paddingRight: "20px" }}
         shape="circle"
         icon={<BellOutlined style={{ color: "white" }} />}
         // onClick={showModal}
