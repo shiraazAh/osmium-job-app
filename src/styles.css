@@ -13,7 +13,16 @@ h1, h2, h3, h4 ,h5, h6 {
   /* margin-top: 25px; */
 }
 
-/***** Bottom Bar *****/
-.bottom-bar {
+/***** Inputs *****/
+.filter-inputs {
+  border-bottom: 1px solid #E0E3EA;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0px;
+}
 
+.filter-inputs .ant-select-selector {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
