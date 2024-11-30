@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Segmented } from "antd";
 import "../styles.css";
+import GradientButton from "../components/Buttons/GradientButton";
 
 export default function JobDetailsPage() {
   const [selected, setSelected] = useState("Description");
@@ -67,6 +68,7 @@ export default function JobDetailsPage() {
           </div>
         )}
       </div>
+      <GradientButton />
     </div>
   );
 }
