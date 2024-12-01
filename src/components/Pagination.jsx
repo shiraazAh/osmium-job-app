@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import JobCard from "../components/JobCard";
 import Pagination from "react-bootstrap/Pagination";
 
 export default function JobPagination() {
@@ -59,19 +60,29 @@ export default function JobPagination() {
   };
 
   return (
+    /**** This is to print job name, company etc.. and if some dont have certain info i print "no company listed" etc ****/
     <div>
       <h1>Jobs</h1>
-
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       <ul>
-        {data.map((job) => (
-          <div>
-            <li key={job.id}>{job.name}</li>
-          </div>
-        ))}
+      {data.map((job) => (
+    <JobCard
+      key={job.id}
+      title={job.name}
+      company={job.company?.name || "No company listed"}
+      location={
+        job.locations?.map((location) => location.name).join(", ") || "No location" //for more than 1 locaton i seperate them with a ", " using map function
+      }
+      // jobType={job.type || "Unknown job type"} // dont need this any more as they all say "job"
+      description={job.contents || "No description available"}
+      publicationDate={job.publication_date || "No date available"}
+      levels={
+        job.levels?.map((level) => level.name).join(", ") || "No levels" // for more than 1 level ", " seperates them.
+      }
+    />
+  ))}
       </ul>
-
       <div className="d-flex justify-content-center">
         <Pagination>
           <Pagination.First onClick={getFirstPage} />
