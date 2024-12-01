@@ -1,32 +1,32 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import React, { useState } from "react";
+import { Button, Modal } from "antd";
 
 export default function ConfirmModal() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleConfirm = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
-      <Button variant="danger" onClick={handleShow}>
-        Delete Job
+      <Button className="main-button-modal" type="primary" onClick={showModal}>
+        Delete
       </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this job</Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Confirm Delete
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-        </Modal.Footer>
+      <Modal
+        className="confirm-button-modal"
+        title="Confirm Delete"
+        open={isModalOpen}
+        onOk={handleConfirm}
+        onCancel={handleCancel}
+        okText="Confirm"
+      >
+        <p>Are you sure you want to delete this item</p>
       </Modal>
     </>
   );

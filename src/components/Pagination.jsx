@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
-import Pagination from "react-bootstrap/Pagination";
+import { Pagination, List } from "antd";
+import "../styles.css";
 
 export default function JobPagination() {
   const [data, setData] = useState([]);
@@ -8,6 +9,7 @@ export default function JobPagination() {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages] = useState(30);
+  const [totalItems] = useState(600); // 30 pages * 20 items per page
 
   useEffect(() => {
     const fetchPage = async (pageNumber) => {
@@ -35,36 +37,23 @@ export default function JobPagination() {
     fetchPage(page);
   }, [page]);
 
-  const getNextPage = () => setPage((prev) => prev + 1);
-  const getPrevPage = () => setPage((prev) => (prev > 1 ? prev - 1 : 1));
-  const getFirstPage = () => setPage(1);
-  const getLastPage = () => setPage(totalPages);
-
-  const getPageNumbers = () => {
-    const numbersToShow = [];
-    const numOfPagesViewable = 5;
-    if (page <= 3) {
-      for (let i = 1; i <= numOfPagesViewable; i++) {
-        numbersToShow.push(i);
-      }
-    } else if (page >= totalPages - 2) {
-      for (let i = totalPages - 4; i <= totalPages; i++) {
-        numbersToShow.push(i);
-      }
-    } else {
-      for (let i = page - 2; i <= page + 2; i++) {
-        numbersToShow.push(i);
-      }
-    }
-    return numbersToShow;
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
   };
 
   return (
-    /**** This is to print job name, company etc.. and if some dont have certain info i print "no company listed" etc ****/
-    <div>
+    <div className="mx-auto px-4 py-3">
       <h1>Jobs</h1>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
+
+     {/*<List
+        loading={isLoading}
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={(job) => <List.Item key={job.id}>{job.name}</List.Item>}
+      /> */}
+
       <ul>
       {data.map((job) => (
     <JobCard
@@ -87,20 +76,18 @@ export default function JobPagination() {
     />
   ))}
       </ul>
-      <div className="d-flex justify-content-center">
-        <Pagination>
-          <Pagination.First onClick={getFirstPage} />
-          <Pagination.Prev onClick={getPrevPage} />
-          {getPageNumbers().map((pageNum) => (
-            <Pagination.Item key={pageNum} onClick={() => setPage(pageNum)}>
-              {pageNum}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next onClick={getNextPage} />
-          <Pagination.Last onClick={getLastPage} />
-        </Pagination>
+
+      <div className="d-flex justify-content-center mt-4 align-items-center">
+        <Pagination
+          current={page}
+          total={totalItems}
+          pageSize={20}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+          // showQuickJumper
+        />
       </div>
-      <div>
+      <div className="text-center mt-3">
         Page {page} of {totalPages}
       </div>
     </div>
