@@ -5,27 +5,30 @@ import {EnvironmentOutlined, CalendarOutlined} from "@ant-design/icons" //icon f
 const {Title, Text} = Typography; //taking title and text components from antd
 
 //helper functions 
+
+/***  THis removes the HTML Tags from the API job Descriptions ***/
 const RemoveHTML = (html) => {
   const doc = new DOMParser().parseFromString(html, "text/html");
-  return doc.body.textContent || "";// THis removes the HTML Tags from the API job Descriptions
-};
-
-const shortenText = (html, maxlength) => { //max string size is determined in return function (set to 150)
+  return doc.body.textContent || "";
+}
+/*** max string size is determined in return function (set to 150)
+//This makes it so the entire job decription doesnt get printed on job card***/
+const shortenText = (html, maxlength) => { 
   const cleanText = RemoveHTML(html);
   return cleanText.length > maxlength
-  ? cleanText.slice(0,maxlength) + "..." : cleanText; //This makes it so the entire job decription doesnt get printed on job card
+  ? cleanText.slice(0,maxlength) + "..." : cleanText; 
 }
-
+/*** this will remove the time from the date to just give YY/MM/DD ***/
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-GB"); //this will remove the time from the date to just give YY/MM/DD
+  return date.toLocaleDateString("en-GB"); 
 }
 
 const JobCard = ({
   title,
   company,
   location,
-  // jobType, // in the API jobtype just shows "job" so i did not inlude in job card
+  /***  jobType, in the API jobtype just shows "job" so i did not inlude in job card ***/
   description,
   publicationDate,
   levels,
