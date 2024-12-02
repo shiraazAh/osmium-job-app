@@ -1,7 +1,12 @@
+import React, { createContext, useState, useContext } from "react";
+
+const JobContext = createContext(null);
+
 export const JobProvider = () => {
+  const [selectedJob, setSelectedJob] = useState(null);
   return (
-    <>
-      <div>This is Components Page</div>
-    </>
+    <JobContext.Provider value={{ selectedJob, setSelectedJob }}>
+      {children}
+    </JobContext.Provider>
   );
 };
