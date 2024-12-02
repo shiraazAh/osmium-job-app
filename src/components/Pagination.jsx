@@ -6,6 +6,8 @@ import { Pagination, List } from "antd";
 import "../styles.css";
 
 export default function JobPagination() {
+  const navigate = useNavigate();
+  const { setSelectedJob } = useJobContext();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,6 +45,11 @@ export default function JobPagination() {
     setPage(pageNumber);
   };
 
+  const handleJobSelect = (job) => {
+    setSelectedJob(job);
+    navigate(`/job/${job.id}`, { state: { jobDetails: job } });
+  };
+
   return (
     <div className="mx-auto px-4 py-3">
       <h1>Jobs</h1>
@@ -60,6 +67,7 @@ export default function JobPagination() {
         {data.map((job) => (
           <JobCard
             key={job.id}
+            onClick={() => handleJobSelect(job)}
             title={job.name}
             company={job.company?.name || "No company listed"}
             /***for more than 1 locaton i seperate them with a ", " using map function***/
