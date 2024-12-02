@@ -1,74 +1,61 @@
 import React, { useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { useJobContext } from "../context/JobContext";
 import { Segmented } from "antd";
-import "../styles.css";
-import GradientButton from "../components/Buttons/GradientButton";
 
 export default function JobDetailsPage() {
+  const { jobId } = useParams();
+  const location = useLocation();
+  const { selectedJob: contextJob } = useJobContext();
   const [selected, setSelected] = useState("Description");
 
-  return (
-    <div>
-      <Segmented
-        options={["Description", "Company"]}
-        onChange={(option) => {
-          setSelected(option);
-        }}
-      />
-      <div>
-        {selected === "Description" && (
-          <div>
-            <div>
-              <h4>Responsibilities:</h4>
-              <ul>
-                <li>
-                  <p>
-                    You will design, develop, and test functions delivered by
-                    applications
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    You will work with our operations teams to ensure your
-                    services are available and reliable
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    You will develop hands-on experience in software development
-                    to perform at scale
-                  </p>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4>Qualifications:</h4>
-              <ul>
-                <li>
-                  <p>Hands-on software development experience in Python</p>
-                </li>
-                <li>
-                  <p>Experience implementing unit and integration tests</p>
-                </li>
-                <li>
-                  <p>Experience with networking and security concepts</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        )}
-        {selected === "Company" && (
-          <div>
-            <h4>About Company</h4>
-            <p>
-              We take great pride in our culture here at Autodesk – our Culture
-              Code is at the core of everything we do. Our values and ways of
-              working help our people thrive and realize their potential, which
-              leads to even better outcomes for our customers.
-            </p>
-          </div>
-        )}
+  const selectedJob = contextJob || location.state?.jobDetails;
+
+  if (!selectedJob) {
+    return (
+      <div className="container mx-auto p-6">
+        <p className="text-red-500">
+          No job selected. Please return to the job list.
+        </p>
       </div>
-      <GradientButton />
+    );
+  }
+
+  return (
+    <div className="container mx-auto p-6">
+      <div className="bg-white shadow-md rounded-lg p-6">
+        <h2 className="text-2xl font-bold mb-4">{selectedJob.name}</h2>
+        <h3 className="text-xl text-gray-600 mb-6">
+          {selectedJob.company?.name}
+        </h3>
+
+        <Segmented
+          options={["Description", "Company"]}
+          onChange={(option) => setSelected(option)}
+          className="mb-6"
+        />
+
+        <div>
+          {selected === "Description" && (
+            <div
+              className="prose max-w-none"
+              dangerouslySetInnerHTML={{
+                __html: selectedJob.contents || "No description available",
+              }}
+            />
+          )}
+
+          {selected === "Company" && (
+            <div>
+              <h4 className="text-xl font-semibold mb-4">About Company</h4>
+              <p>
+                {selectedJob.company?.description ||
+                  "No company description available"}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
