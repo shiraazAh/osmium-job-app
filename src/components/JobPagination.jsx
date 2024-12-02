@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useJobContext } from "../context/JobContext";
-import JobCard from "../components/JobCard";
+import { JobProvider, useJobContext } from "../context/JobContext";
+import JobCard from "./JobCard";
 import { Pagination, List } from "antd";
 import "../styles.css";
 
@@ -46,6 +46,10 @@ export default function JobPagination() {
   };
 
   const handleJobSelect = (job) => {
+    if (!setSelectedJob) {
+      console.error("setSelectedJob is undefined.");
+      return;
+    }
     setSelectedJob(job);
     navigate(`/job/${job.id}`, { state: { jobDetails: job } });
   };
