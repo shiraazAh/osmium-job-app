@@ -1,30 +1,32 @@
 import React from "react";
-import {Card, Tag, Typography} from "antd";
-import {EnvironmentOutlined, CalendarOutlined} from "@ant-design/icons" //icon for location and calendar
+import { Card, Tag, Typography } from "antd";
+import { EnvironmentOutlined, CalendarOutlined } from "@ant-design/icons"; //icon for location and calendar
 
-const {Title, Text} = Typography; //taking title and text components from antd
+const { Title, Text } = Typography; //taking title and text components from antd
 
-//helper functions 
+//helper functions
 
 /***  THis removes the HTML Tags from the API job Descriptions ***/
 const RemoveHTML = (html) => {
   const doc = new DOMParser().parseFromString(html, "text/html");
   return doc.body.textContent || "";
-}
+};
 /*** max string size is determined in return function (set to 150)
 //This makes it so the entire job decription doesnt get printed on job card***/
-const shortenText = (html, maxlength) => { 
+const shortenText = (html, maxlength) => {
   const cleanText = RemoveHTML(html);
   return cleanText.length > maxlength
-  ? cleanText.slice(0,maxlength) + "..." : cleanText; 
-}
+    ? cleanText.slice(0, maxlength) + "..."
+    : cleanText;
+};
 /*** this will remove the time from the date to just give YY/MM/DD ***/
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-GB"); 
-}
+  return date.toLocaleDateString("en-GB");
+};
 
 const JobCard = ({
+  onClick,
   title,
   company,
   location,
@@ -34,28 +36,26 @@ const JobCard = ({
   levels,
 }) => {
   return (
-    <div className = "job-card-container">
-    <Card className="job-card" hoverable>
-      <div>
-        <Title level={4}>{title}</Title> 
-        <Text strong>{company}</Text> 
-      </div>
-      <div className="mt-1">
-        <EnvironmentOutlined style={{ marginRight: 8 }} />
-        <Text>{location}</Text> 
-      </div>
-
-      <div className="mt-2">
-        <CalendarOutlined style={{ marginRight: 8 }} />
-        <Text>{formatDate(publicationDate)}</Text> 
-      </div>
-      <div className = "tag-container">
-        <Tag color="blue">{levels}</Tag>
+    <div className="job-card-container">
+      <Card className="job-card" hoverable>
+        onClick={onClick}
+        <div>
+          <Title level={4}>{title}</Title>
+          <Text strong>{company}</Text>
         </div>
-      <p className="mt-2">{shortenText(description, 150)}</p> 
-      
-    
-    </Card>
+        <div className="mt-1">
+          <EnvironmentOutlined style={{ marginRight: 8 }} />
+          <Text>{location}</Text>
+        </div>
+        <div className="mt-2">
+          <CalendarOutlined style={{ marginRight: 8 }} />
+          <Text>{formatDate(publicationDate)}</Text>
+        </div>
+        <div className="tag-container">
+          <Tag color="blue">{levels}</Tag>
+        </div>
+        <p className="mt-2">{shortenText(description, 150)}</p>
+      </Card>
     </div>
   );
 };
