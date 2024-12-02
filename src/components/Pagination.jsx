@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useJobContext } from "../context/JobContext";
 import JobCard from "../components/JobCard";
 import { Pagination, List } from "antd";
 import "../styles.css";
@@ -47,7 +49,7 @@ export default function JobPagination() {
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
-     {/*<List
+      {/*<List
         loading={isLoading}
         itemLayout="horizontal"
         dataSource={data}
@@ -55,26 +57,25 @@ export default function JobPagination() {
       /> */}
 
       <ul>
-      {data.map((job) => (
-    <JobCard
-      key={job.id}
-      title={job.name}
-      company={job.company?.name || "No company listed"}
-      
-      /***for more than 1 locaton i seperate them with a ", " using map function***/
-      location={
-        job.locations?.map((location) => location.name).join(", ") || "No location" 
-      }
-      /* jobType={job.type || "Unknown job type"} // dont need this any more as they all say "job"*/
-      description={job.contents || "No description available"}
-      publicationDate={job.publication_date || "No date available"}
-
-      /*** for more than 1 level ", " seperates them. ***/
-      levels={
-        job.levels?.map((level) => level.name).join(", ") || "No levels" 
-      }
-    />
-  ))}
+        {data.map((job) => (
+          <JobCard
+            key={job.id}
+            title={job.name}
+            company={job.company?.name || "No company listed"}
+            /***for more than 1 locaton i seperate them with a ", " using map function***/
+            location={
+              job.locations?.map((location) => location.name).join(", ") ||
+              "No location"
+            }
+            /* jobType={job.type || "Unknown job type"} // dont need this any more as they all say "job"*/
+            description={job.contents || "No description available"}
+            publicationDate={job.publication_date || "No date available"}
+            /*** for more than 1 level ", " seperates them. ***/
+            levels={
+              job.levels?.map((level) => level.name).join(", ") || "No levels"
+            }
+          />
+        ))}
       </ul>
 
       <div className="d-flex justify-content-center mt-4 align-items-center">
