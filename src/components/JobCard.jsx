@@ -37,8 +37,7 @@ const JobCard = ({
 }) => {
   return (
     <div className="job-card-container">
-      <Card className="job-card" hoverable>
-        onClick={onClick}
+      <Card className="job-card" hoverable onClick={onClick}>
         <div>
           <Title level={4}>{title}</Title>
           <Text strong>{company}</Text>
