@@ -1,32 +1,41 @@
-import React, { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { useJobContext } from "../context/JobContext";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Segmented } from "antd";
 
 export default function JobDetailsPage() {
-  const { jobId } = useParams();
-  const location = useLocation();
-  const { selectedJob: contextJob } = useJobContext();
+  const { jobId } = useParams(); // Extract job ID from the URL
+  const [jobDetails, setJobDetails] = useState(null);
   const [selected, setSelected] = useState("Description");
 
-  const selectedJob = contextJob || location.state?.jobDetails;
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      try {
+        const response = await fetch(
+          `https://www.themuse.com/api/public/jobs/${jobId}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch job details");
+        }
+        const data = await response.json();
+        setJobDetails(data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
 
-  if (!selectedJob) {
-    return (
-      <div className="container mx-auto p-6">
-        <p className="text-red-500">
-          No job selected. Please return to the job list.
-        </p>
-      </div>
-    );
+    fetchJobDetails();
+  }, [jobId]); // Fetch job details when jobId changes
+
+  if (!jobDetails) {
+    return <div>Loading job details...</div>;
   }
 
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">{selectedJob.name}</h2>
+        <h2 className="text-2xl font-bold mb-4">{jobDetails.name}</h2>
         <h3 className="text-xl text-gray-600 mb-6">
-          {selectedJob.company?.name}
+          {jobDetails.company?.name}
         </h3>
 
         <Segmented
@@ -40,7 +49,7 @@ export default function JobDetailsPage() {
             <div
               className="prose max-w-none"
               dangerouslySetInnerHTML={{
-                __html: selectedJob.contents || "No description available",
+                __html: jobDetails.contents || "No description available",
               }}
             />
           )}
@@ -49,7 +58,7 @@ export default function JobDetailsPage() {
             <div>
               <h4 className="text-xl font-semibold mb-4">About Company</h4>
               <p>
-                {selectedJob.company?.description ||
+                {jobDetails.company?.description ||
                   "No company description available"}
               </p>
             </div>

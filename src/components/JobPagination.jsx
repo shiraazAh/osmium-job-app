@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { JobProvider, useJobContext } from "../context/JobContext";
+import { useNavigate } from "react-router-dom"; // Ensure this import is added
 import JobCard from "./JobCard";
-import { Pagination, List } from "antd";
+import { Pagination } from "antd";
 import "../styles.css";
 
 export default function JobPagination() {
-  const navigate = useNavigate();
-  const { setSelectedJob } = useJobContext();
+  const navigate = useNavigate(); // Use useNavigate here
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,13 +43,9 @@ export default function JobPagination() {
     setPage(pageNumber);
   };
 
-  const handleJobSelect = (job) => {
-    if (!setSelectedJob) {
-      console.error("setSelectedJob is undefined.");
-      return;
-    }
-    setSelectedJob(job);
-    navigate(`/job/${job.id}`, { state: { jobDetails: job } });
+  const handleJobSelect = (jobId) => {
+    // Navigate to the job details page using the job ID
+    navigate(`/job/${jobId}`);
   };
 
   return (
@@ -60,29 +54,19 @@ export default function JobPagination() {
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
-      {/*<List
-        loading={isLoading}
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(job) => <List.Item key={job.id}>{job.name}</List.Item>}
-      /> */}
-
       <ul>
         {data.map((job) => (
           <JobCard
             key={job.id}
-            onClick={() => handleJobSelect(job)}
+            onClick={() => handleJobSelect(job.id)} // Pass only the job ID to navigate
             title={job.name}
             company={job.company?.name || "No company listed"}
-            /***for more than 1 locaton i seperate them with a ", " using map function***/
             location={
               job.locations?.map((location) => location.name).join(", ") ||
               "No location"
             }
-            /* jobType={job.type || "Unknown job type"} // dont need this any more as they all say "job"*/
             description={job.contents || "No description available"}
             publicationDate={job.publication_date || "No date available"}
-            /*** for more than 1 level ", " seperates them. ***/
             levels={
               job.levels?.map((level) => level.name).join(", ") || "No levels"
             }
@@ -97,7 +81,6 @@ export default function JobPagination() {
           pageSize={20}
           onChange={handlePageChange}
           showSizeChanger={false}
-          // showQuickJumper
         />
       </div>
       <div className="text-center mt-3">
