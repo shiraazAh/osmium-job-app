@@ -30,11 +30,12 @@ export default function WelcomePage() {
             positive and keep moving forward
           </p>
 
-          <GradientButton className="button1" height={50}></GradientButton>
+          <GradientButton className="button1" height={50}>
             {" "}
             <b>Get Started </b>
-          </GradientButton>
-          <GradientButton className="button2" height={50}></GradientButton>
+            </GradientButton>
+          
+          <GradientButton className="button2" height={50}>
             <b>Have an account? Login</b>{" "}
             </GradientButton>
         </div>

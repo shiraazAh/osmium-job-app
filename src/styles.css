@@ -36,7 +36,7 @@ h1, h2, h3, h4 ,h5, h6 {
 
 .container-fluid {
   background-color: rgb(240, 235, 234);
-  background-image: url("/ww.png");
+  background-image: url("../assets/ww.png");
   background-blend-mode: overlay;
   background-size: cover;
   background-repeat: no-repeat;
@@ -122,6 +122,4 @@ h1, h2, h3, h4 ,h5, h6 {
   }
 }
 
-h1 {
-  font-family: "Platypi", serif;
-}
+
