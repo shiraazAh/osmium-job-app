@@ -1,5 +1,6 @@
 import { Layout } from "antd";
 import React from "react";
+import GradientButton from "../components/Buttons/GradientButton";
 
 export default function WelcomePage() {
   return (
@@ -16,7 +17,7 @@ export default function WelcomePage() {
         <div className="App">
           <img
             className="img-fluid"
-            src="/project-image.png"
+            src="../assets/project-image.png"
             alt="wait a moment please.."
           />
         </div>
@@ -29,13 +30,13 @@ export default function WelcomePage() {
             positive and keep moving forward
           </p>
 
-          <button className="button1">
+          <GradientButton className="button1" height={50}></GradientButton>
             {" "}
             <b>Get Started </b>
-          </button>
-          <button className="button2">
+          </GradientButton>
+          <GradientButton className="button2" height={50}></GradientButton>
             <b>Have an account? Login</b>{" "}
-          </button>
+            </GradientButton>
         </div>
         
       </div>
