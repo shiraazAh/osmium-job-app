@@ -1,18 +1,24 @@
-import "./styles.css";
-import Navbar from "./components/Navbar";
-import WelcomePage from "./pages/WelcomePage";
 
-import { Routes, Route } from "react-router-dom";
+import { Authenticator } from "@aws-amplify/ui-react";
+import { Amplify } from "aws-amplify";
+import cognitoAuthConfig from "./aws-exports";
 import AuthenticatedRoutes from "./routes/AuthenticatedRouted";
+import "@aws-amplify/ui-react/styles.css";
+import { Route, Routes } from "react-router-dom";
 
-export default function App() {
+Amplify.configure(cognitoAuthConfig);
+
+export default function App({ Component, pageProps }) {
   return (
-    <div className="App">
-        <Routes>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/*" element={<AuthenticatedRoutes />} />
-        </Routes>
-      <div className="position-fixed bottom-0" style={{height: "50px"}}></div>
-    </div>
+    <Authenticator signUpAttributes={["email", "name"]}>
+      {() => (
+        <main>
+          <Routes>
+            {/* <Route path="/" element={<WelcomePage />} /> */}
+            <Route path="/*" element={<AuthenticatedRoutes />} />
+          </Routes>
+        </main>
+      )}
+    </Authenticator>
   );
 }

@@ -12,9 +12,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ConfigProvider theme={theme}>
       <AntdApp style={{ height: "100vh" }}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
       </AntdApp>
     </ConfigProvider>
   </StrictMode>

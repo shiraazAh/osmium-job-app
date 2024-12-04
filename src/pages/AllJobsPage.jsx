@@ -5,12 +5,18 @@ import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import EnvironmentOutlined from "@ant-design/icons/EnvironmentOutlined";
 import FilterOutlined from "@ant-design/icons/FilterOutlined";
 import GradientButton from "../components/Buttons/GradientButton";
+import CustomNavbar from "../components/Navbar";
 
 const { Search } = Input;
 
 export default function AllJobsPage() {
   return (
     <>
+      <div
+        className="position-relative"
+      >
+        <CustomNavbar />
+      </div>
       <h2 className="text-white mt-3 fw-bold">
         Search & Land on your dream job
       </h2>

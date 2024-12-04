@@ -7,10 +7,17 @@ h1, h2, h3, h4 ,h5, h6 {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+
 /***** Navbar *****/
 .navbar-container {
   height: 50px;
   /* margin-top: 25px; */
+}
+
+.navbar-bg-extend  {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%);
+    max-height: 500px;
 }
 
 /***** Inputs *****/
@@ -25,4 +32,21 @@ h1, h2, h3, h4 ,h5, h6 {
 .filter-inputs .ant-select-selector {
   padding-left: 0px !important;
   padding-right: 0px !important;
+}
+
+/***** Profile Page *****/
+
+.profile-page-icon-sizing {
+  width: 20px;
+}
+
+.profile-page-lists:hover {
+  transition: all 0.3s;
+  background: #54a1ff18;
+  cursor: pointer;
+}
+
+.profile-page-list-container {
+  border-radius: 8px;
+  overflow: hidden;
 }
