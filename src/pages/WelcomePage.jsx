@@ -1,46 +1,51 @@
 import { Layout } from "antd";
 import React from "react";
 import GradientButton from "../components/Buttons/GradientButton";
+import BGImage from "../assets/background/project-image.png";
+import SecondaryButton from "../components/Buttons/SecondaryButton";
 
-export default function WelcomePage() {
+export default function WelcomePage({ setAuthState }) {
   return (
     <>
-    <Layout
-      style={{
-        minHeight: "100vh",
-        maxWidth: "375px",
-        margin: "0 auto",
-        padding: "0 20px",
-      }} >
-
-      <div className="container-fluid">
-        <div className="App">
+      <Layout
+        style={{
+          minHeight: "100vh",
+          maxWidth: "375px",
+          margin: "0 auto",
+          padding: "0 20px",
+          background: "#F8F8F8",
+        }}
+      >
+        <div className="container-fluid">
           <img
-            className="img-fluid"
-            src="../assets/project-image.png"
+            className="img-fluid mt-4"
+            src={BGImage}
             alt="wait a moment please.."
           />
-        </div>
-        <div className="description">
-          <h1>
-            <b>Your Job Search, Made Smarter</b>
-          </h1>
-          <p>
-            Every job search is a journey of growth and opportunity. Stay
-            positive and keep moving forward
-          </p>
+          <div className="description">
+            <h1 className="fw-bolder mt-4">Your Job Search, Made Smarter</h1>
+            <p className="text-muted">
+              Every job search is a journey of growth and opportunity. And we
+              make sure you find it quickly and easily.
+            </p>
 
-          <GradientButton className="button1" height={50}>
-            {" "}
-            <b>Get Started </b>
+            <GradientButton
+              className="w-100"
+              height={50}
+              onClick={() => setAuthState("signUp")}
+            >
+              Get Started
             </GradientButton>
-          
-          <GradientButton className="button2" height={50}>
-            <b>Have an account? Login</b>{" "}
-            </GradientButton>
+
+            <SecondaryButton
+              className="w-100 mt-3"
+              height={50}
+              onClick={() => setAuthState("signIn")}
+            >
+              Have an account? Login
+            </SecondaryButton>
+          </div>
         </div>
-        
-      </div>
       </Layout>
     </>
   );

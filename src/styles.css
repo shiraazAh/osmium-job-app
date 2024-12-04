@@ -63,16 +63,6 @@ h6 {
   font-family: Roboto;
 }
 
-.container-fluid {
-  background-color: rgb(240, 235, 234);
-  background-image: url("../assets/ww.png");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 800px;
-}
-
 .img-fluid {
   width: 336px;
   height: 336px;
@@ -130,4 +120,18 @@ h6 {
   background: radial-gradient(circle at center, #54a0ff, #3081d0) !important;
   border: none !important;
   color: white !important;
+}
+
+/***** Amplify Authentication styling *****/
+
+.amplify-button--primary {
+  background: radial-gradient(circle at center, #54a0ff, #3081d0) !important;
+  border-radius: 8px !important;
+  height: 50px !important;
+  margin-top: 10px !important;
+}
+
+.amplify-tabs__item--active {
+  color: #3081d0 !important;
+  border-color: #3081d0 !important;
 }

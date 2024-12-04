@@ -13,7 +13,7 @@ import { signOut } from "aws-amplify/auth";
 
 export default function ProfilePage() {
     
-  const { name, email } = useContext(AuthContext);
+  const { name, email, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const links = [
@@ -53,7 +53,10 @@ export default function ProfilePage() {
         />
       ),
       onClick: () => {
-        signOut().then(() => navigate("/"));
+        signOut().then(() => {
+            navigate("/");
+            logout();
+        });
       },
     },
   ];
