@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-osmiumjobapp-dev-87f00-authRole",
+      "UnauthRoleArn": "arn:aws:iam::386053940158:role/amplify-osmiumjobapp-dev-87f00-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::386053940158:role/amplify-osmiumjobapp-dev-87f00-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-osmiumjobapp-dev-87f00-deployment",
+      "UnauthRoleName": "amplify-osmiumjobapp-dev-87f00-unauthRole",
+      "StackName": "amplify-osmiumjobapp-dev-87f00",
+      "StackId": "arn:aws:cloudformation:eu-west-1:386053940158:stack/amplify-osmiumjobapp-dev-87f00/0ee46db0-b1ab-11ef-9f3b-0a175ebbed7f",
+      "AmplifyAppId": "d2fcf3h4nro67u"
+    },
+    "categories": {
+      "auth": {
+        "osmiumjobapp250c90e2": {}
+      }
+    }
+  }
+}

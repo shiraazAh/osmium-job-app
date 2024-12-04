@@ -13,10 +13,17 @@ h6 {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
+
 /***** Navbar *****/
 .navbar-container {
   height: 50px;
   /* margin-top: 25px; */
+}
+
+.navbar-bg-extend  {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%);
+    max-height: 500px;
 }
 
 /***** Inputs *****/
@@ -33,21 +40,27 @@ h6 {
   padding-right: 0px !important;
 }
 
+/***** Profile Page *****/
+
+.profile-page-icon-sizing {
+  width: 20px;
+}
+
+.profile-page-lists:hover {
+  transition: all 0.3s;
+  background: #54a1ff18;
+  cursor: pointer;
+}
+
+.profile-page-list-container {
+  border-radius: 8px;
+  overflow: hidden;
+}
 /***** WelcomePage *****/
 
 .WelcomePage {
   text-align: center;
   font-family: Roboto;
-}
-
-.container-fluid {
-  background-color: rgb(240, 235, 234);
-  background-image: url("../assets/ww.png");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 800px;
 }
 
 .img-fluid {
@@ -107,4 +120,18 @@ h6 {
   background: radial-gradient(circle at center, #54a0ff, #3081d0) !important;
   border: none !important;
   color: white !important;
+}
+
+/***** Amplify Authentication styling *****/
+
+.amplify-button--primary {
+  background: radial-gradient(circle at center, #54a0ff, #3081d0) !important;
+  border-radius: 8px !important;
+  height: 50px !important;
+  margin-top: 10px !important;
+}
+
+.amplify-tabs__item--active {
+  color: #3081d0 !important;
+  border-color: #3081d0 !important;
 }

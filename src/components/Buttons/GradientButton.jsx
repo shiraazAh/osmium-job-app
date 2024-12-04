@@ -28,7 +28,12 @@ const useStyle = createStyles(({ prefixCls, css }) => ({
     }
   `,
 }));
-const GradientButton = ({children, className, height = 40}) => {
+const GradientButton = ({
+  children,
+  className,
+  height = 40,
+  onClick = () => {},
+}) => {
   const { styles } = useStyle();
   return (
     <ConfigProvider
@@ -38,6 +43,7 @@ const GradientButton = ({children, className, height = 40}) => {
     >
       <Button
         className={className ? className : ""}
+        onClick={onClick}
         style={{ height: height }}
         type="primary"
         size="large"
