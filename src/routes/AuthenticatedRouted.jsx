@@ -3,6 +3,7 @@ import { Layout } from "antd";
 import CustomNavbar from "../components/Navbar";
 import AllJobsPage from "../pages/AllJobsPage";
 import ComponentsPage from "../pages/ComponentsPage";
+import JobPagination from "../components/JobPagination";
 import JobDetailsPage from "../pages/JobDetailsPage";
 
 export default function AuthenticatedRoutes() {
@@ -23,9 +24,10 @@ export default function AuthenticatedRoutes() {
         }}
       >
         <Routes>
-          <Route path="/jobs" element={<AllJobsPage />} />
+          <Route path="/alljobs" element={<ComponentsPage />} />
           <Route path="/components" element={<ComponentsPage />} />
-          <Route path="/details" element={<JobDetailsPage />} />
+          <Route path="/jobs" element={<JobPagination />} />
+          <Route path="/job/:jobId" element={<JobDetailsPage />} />
         </Routes>
       </Layout>
       {/*** Temporary ****/}
