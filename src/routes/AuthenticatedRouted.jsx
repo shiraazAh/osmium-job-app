@@ -8,6 +8,8 @@ import BottomBar from "../components/BottomBar";
 import { useEffect, useState } from "react";
 import { AuthContext } from "react-oidc-context";
 import ProfilePage from "../pages/ProfilePage";
+import JobPagination from "../components/JobPagination";
+import JobDetailsPage from "../pages/JobDetailsPage";
 
 export default function AuthenticatedRoutes() {
   const [userData, setUserData] = useState(null);
@@ -43,6 +45,8 @@ export default function AuthenticatedRoutes() {
               <Route path="/" element={<AllJobsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/components" element={<ComponentsPage />} />
+              <Route path="/jobs" element={<JobPagination />} />
+              <Route path="/job/:jobId" element={<JobDetailsPage />} />
             </Routes>
           </Layout>
           <BottomBar />
