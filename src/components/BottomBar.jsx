@@ -36,10 +36,10 @@ export default function BottomBar() {
           alt="briefcase icon"
         />
       </NavLink>
-      <NavLink to="/components" className="border-0 bg-transparent">
+      <NavLink to="/jobs" className="border-0 bg-transparent">
         <img
           src={
-            pathname === "/components"
+            pathname === "/jobs"
               ? BriefcaseIconFilled
               : BriefcaseIconOutlined
           }
