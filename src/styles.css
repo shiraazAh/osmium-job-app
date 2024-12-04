@@ -1,10 +1,16 @@
 .App {
-  font-family: 'Inter', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: "Inter", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /***** Basic ****/
-h1, h2, h3, h4 ,h5, h6 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /***** Navbar *****/
@@ -15,7 +21,7 @@ h1, h2, h3, h4 ,h5, h6 {
 
 /***** Inputs *****/
 .filter-inputs {
-  border-bottom: 1px solid #E0E3EA;
+  border-bottom: 1px solid #e0e3ea;
   border-top: 0;
   border-left: 0;
   border-right: 0;
@@ -76,3 +82,29 @@ h1, h2, h3, h4 ,h5, h6 {
   display: block;
 }
 
+/*****job cards *****/
+.job-card {
+  border: 2px solid #E0E3EA;
+  width: 100%;
+  margin-bottom: 10px;
+  
+}
+/*** Oisin trying to fix gap between cards (think i got it) ****/
+.job-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 52vh; */
+ 
+}
+
+/***** Modal *****/
+.main-button-modal {
+  background: radial-gradient(circle at center, #54a0ff, #3081d0);
+}
+
+.confirm-button-modal .ant-modal-footer .ant-btn-primary {
+  background: radial-gradient(circle at center, #54a0ff, #3081d0) !important;
+  border: none !important;
+  color: white !important;
+}
