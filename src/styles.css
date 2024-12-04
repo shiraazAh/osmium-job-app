@@ -33,6 +33,55 @@ h6 {
   padding-right: 0px !important;
 }
 
+/***** WelcomePage *****/
+
+.WelcomePage {
+  text-align: center;
+  font-family: Roboto;
+}
+
+.container-fluid {
+  background-color: rgb(240, 235, 234);
+  background-image: url("../assets/ww.png");
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 800px;
+}
+
+.img-fluid {
+  width: 336px;
+  height: 336px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.description {
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button1,
+.button2 {
+  text-align: center;
+  padding: 15px;
+  width: 336px;
+  height: 49px;
+  margin: 12px auto;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 5px 5px 10px rgba(24, 134, 245, 0.15);
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+}
+
 /*****job cards *****/
 .job-card {
   border: 2px solid #E0E3EA;
