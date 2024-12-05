@@ -95,21 +95,90 @@ h6 {
   display: block;
 }
 
-/*****job cards *****/
+/* Container styles  JOB CARDS */
 .job-card {
-  border: 2px solid #E0E3EA;
-  width: 100%;
-  margin-bottom: 10px;
-  
-}
-/*** Oisin trying to fix gap between cards (think i got it) ****/
-.job-card-container {
+  width: 400px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  /* height: 52vh; */
- 
+  flex-direction: column;
+  padding: 0px;
+  border: 1px solid #e0e3ea;
+  margin-bottom: 10px;
 }
+
+/* Top section styles */
+.job-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.job-card-left {
+  display: flex;
+  align-items: center;
+}
+
+.company-logo {
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+  border-radius: 20%;
+  margin-bottom: 5px;
+}
+
+.company-name {
+  margin: 0;
+  color: #6b6b6b;
+  font-weight: 500;
+}
+
+.job-title {
+  margin: 0;
+  font-size: 15px; 
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: black;
+}
+
+/* Save button styles */
+.save-button {
+  padding: 0;
+  margin-left: 5px;
+}
+.save-button:hover .anticon {
+  transform: scale(1.2); /* increases size on hover */
+}
+/* Bottom section styles */
+.job-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.job-location {
+  display: flex;
+  align-items: center;
+  color: #858585;
+}
+
+.location-icon {
+  margin-right: 5px;
+  font-size: larger;
+}
+
+.location-text {
+  margin: 0;
+  color: rgb(139, 139, 139);
+  font-size: 15px;
+}
+
+.job-salary {
+  margin: 0;
+  font-size: small;
+  margin-left: 5px;
+}
+/** THIS IS THE END OF THE JOB CARDS ***/
+
 
 /***** Modal *****/
 .main-button-modal {
