@@ -8,7 +8,7 @@ const JobCard = ({
   title,
   company,
   location,
-  salary, /** Still working on the salary **/
+  salary, /** Still working on the salary **/o
 }) => {
   return (
     <Card className="job-card" hoverable bodyStyle= {{padding: "20px"}} onClick={onClick}>
