@@ -1,14 +1,14 @@
 import React from "react";
 import { Card, Button } from "antd";
 import { EnvironmentOutlined, HeartOutlined } from "@ant-design/icons";
-import "../styles.css"; // Import the CSS file
+import "../styles.css"; 
 
 const JobCard = ({
   onClick,
   title,
   company,
   location,
-  salary, /** Still working on the salary **/o
+  salary, /** Still working on the salary **/
 }) => {
   return (
     <Card className="job-card" hoverable bodyStyle= {{padding: "20px"}} onClick={onClick}>
