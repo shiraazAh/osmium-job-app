@@ -13,17 +13,16 @@ h6 {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-
 /***** Navbar *****/
 .navbar-container {
   height: 50px;
   /* margin-top: 25px; */
 }
 
-.navbar-bg-extend  {
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%);
-    max-height: 500px;
+.navbar-bg-extend {
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%);
+  max-height: 500px;
 }
 
 /***** Inputs *****/
@@ -133,7 +132,7 @@ h6 {
 
 .job-title {
   margin: 0;
-  font-size: 15px; 
+  font-size: 15px;
   font-weight: 700;
   margin-bottom: 5px;
   color: black;
@@ -195,7 +194,7 @@ h6 {
 
 .job-title {
   margin: 0;
-  font-size: 15px; 
+  font-size: 15px;
   font-weight: 700;
   margin-bottom: 5px;
   color: black;
@@ -241,7 +240,6 @@ h6 {
 }
 /** THIS IS THE END OF THE JOB CARDS ***/
 
-
 /***** Modal *****/
 .main-button-modal {
   background: radial-gradient(circle at center, #54a0ff, #3081d0);
@@ -265,4 +263,12 @@ h6 {
 .amplify-tabs__item--active {
   color: #3081d0 !important;
   border-color: #3081d0 !important;
+}
+.custom-segmented .ant-segmented-item {
+  color: #666;
+}
+
+.custom-segmented .ant-segmented-item-selected {
+  color: #1890ff;
+  font-weight: bold;
 }

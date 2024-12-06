@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Segmented } from "antd";
+import "../styles.css";
 
 export default function JobDetailsPage() {
   const { jobId } = useParams(); // Extract job ID from the URL
@@ -41,7 +42,7 @@ export default function JobDetailsPage() {
         <Segmented
           options={["Description", "Company"]}
           onChange={(option) => setSelected(option)}
-          className="mb-6"
+          className="custom-segmented mb-6"
         />
 
         <div>
@@ -53,7 +54,6 @@ export default function JobDetailsPage() {
               }}
             />
           )}
-
           {selected === "Company" && (
             <div>
               <h4 className="text-xl font-semibold mb-4">About Company</h4>
