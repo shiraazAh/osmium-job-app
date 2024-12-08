@@ -9,6 +9,7 @@ import {
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
+import SecondaryButton from "../components/Buttons/SecondaryButton";
 
 export default function ApplicationSuccessPage() {
   const navigate = useNavigate();
@@ -40,7 +41,15 @@ export default function ApplicationSuccessPage() {
   }
 
   const handleGoBack = () => {
-    navigate(`/job/${jobId}`); // Go back to the previous page
+    navigate(`/job/${jobId}`); // Navigate to the success page
+  };
+
+  const handleViewMyApplications = () => {
+    navigate("/my-applications"); // Navigate to the jobs pages
+  };
+
+  const handleFindMoreJobs = () => {
+    navigate("/jobs"); // Navigate to the jobs pages
   };
 
   return (
@@ -83,6 +92,22 @@ export default function ApplicationSuccessPage() {
             </p>
           </div>
         </div>
+      </div>
+      <div>
+        <SecondaryButton
+          className="w-100 shadow"
+          height={50}
+          onClick={handleViewMyApplications}
+        >
+          View My Applications
+        </SecondaryButton>
+        <GradientButton
+          className="w-100 shadow"
+          height={50}
+          onClick={handleFindMoreJobs}
+        >
+          Find More Jobs
+        </GradientButton>
       </div>
     </div>
   );
