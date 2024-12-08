@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Segmented } from "antd";
+import { useParams, useNavigate } from "react-router-dom";
+import { Segmented, Button } from "antd";
+import { LeftOutlined } from "@ant-design/icons";
 import "../styles.css";
 
 export default function JobDetailsPage() {
+  const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
   const [selected, setSelected] = useState("Description");
@@ -31,9 +33,20 @@ export default function JobDetailsPage() {
     return <div>Loading job details...</div>;
   }
 
+  const handleGoBack = () => {
+    navigate("/jobs"); // Go back to the previous page
+  };
+
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6">
+        <Button
+          type="text"
+          icon={<LeftOutlined />} // Changed icon
+          onClick={handleGoBack}
+          className="mb-4 pl-0 back-button" // Removed left padding
+        ></Button>
+
         <h2 className="text-2xl font-bold mb-4">{jobDetails.name}</h2>
         <h3 className="text-xl text-gray-600 mb-6">
           {jobDetails.company?.name}

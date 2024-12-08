@@ -264,6 +264,8 @@ h6 {
   color: #3081d0 !important;
   border-color: #3081d0 !important;
 }
+
+/***** Job Detail Page Segemeneted styling *****/
 .custom-segmented .ant-segmented-item {
   color: #666;
 }
@@ -271,4 +273,9 @@ h6 {
 .custom-segmented .ant-segmented-item-selected {
   color: #1890ff;
   font-weight: bold;
+}
+
+/***** Job Detail Page Back Button styling *****/
+.back-button {
+  background-color: #e3e3e347;
 }
