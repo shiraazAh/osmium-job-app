@@ -10,7 +10,7 @@ import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
 
-export default function JobDetailsPage() {
+export default function ApplicationSuccessPage() {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
@@ -40,11 +40,7 @@ export default function JobDetailsPage() {
   }
 
   const handleGoBack = () => {
-    navigate("/jobs"); // Go back to the jobs page
-  };
-
-  const handleApplyClick = () => {
-    navigate(`/job/${jobId}/success`); // Navigate to the success page
+    navigate(`/job/${jobId}`); // Go back to the previous page
   };
 
   return (
@@ -86,41 +82,6 @@ export default function JobDetailsPage() {
                 .join(", ") || "No location specified"}
             </p>
           </div>
-        </div>
-
-        <h3 className="job-salary text-center">$K/mo</h3>
-        <GradientButton
-          className="w-100 shadow"
-          height={50}
-          onClick={handleApplyClick}
-        >
-          Apply
-        </GradientButton>
-
-        <Segmented
-          options={["Description", "Company"]}
-          onChange={(option) => setSelected(option)}
-          className="custom-segmented mb-6"
-        />
-
-        <div className="information">
-          {selected === "Description" && (
-            <div
-              className="prose max-w-none custom-list-styling"
-              dangerouslySetInnerHTML={{
-                __html: jobDetails.contents || "No description available",
-              }}
-            />
-          )}
-          {selected === "Company" && (
-            <div>
-              <h4 className="text-xl font-semibold mb-4">About Company</h4>
-              <p>
-                {jobDetails.company?.description ||
-                  "No company description available"}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>
