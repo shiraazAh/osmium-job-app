@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
+import GradientButton from "../components/Buttons/GradientButton";
 
 export default function JobDetailsPage() {
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ export default function JobDetailsPage() {
             className="w-full h-full object-cover absolute top-0 left-0 text-center"
           />
         </div>
+
         <h2 className="text-2xl font-bold mb-4 text-center">
           {jobDetails.name}
         </h2>
@@ -83,6 +85,9 @@ export default function JobDetailsPage() {
         </div>
 
         <h3 className="job-salary text-center">$K/mo</h3>
+        <GradientButton className="w-100 shadow" height={50}>
+          Apply
+        </GradientButton>
 
         <Segmented
           options={["Description", "Company"]}
