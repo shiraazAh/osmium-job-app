@@ -90,7 +90,7 @@ export default function JobDetailsPage() {
 
         <h3 className="job-salary text-center">$K/mo</h3>
         <GradientButton
-          className="w-100 shadow"
+          className="w-100 shadow detail-apply-button"
           height={50}
           onClick={handleApplyClick}
         >
@@ -106,7 +106,7 @@ export default function JobDetailsPage() {
         <div className="information">
           {selected === "Description" && (
             <div
-              className="prose max-w-none custom-list-styling"
+              className="prose max-w-none detail-bullets-list-styling"
               dangerouslySetInnerHTML={{
                 __html: jobDetails.contents || "No description available",
               }}

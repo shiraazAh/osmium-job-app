@@ -300,18 +300,24 @@ h6 {
 }
 
 /***** Job Detail Page Bullet points styling *****/
-.custom-list-styling ul,
-.custom-list-styling ol {
+
+.detail-apply-button {
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.detail-bullets-list-styling ul,
+.detail-bullets-list-styling ol {
   padding-left: 20px;
 }
 
-.custom-list-styling li {
+.detail-bullets-list-styling li {
   color: inherit;
   list-style-type: none;
   position: relative;
 }
 
-.custom-list-styling ul li::before {
+.detail-bullets-list-styling ul li::before {
   content: "";
   display: inline-block;
   width: 7px;
@@ -321,4 +327,48 @@ h6 {
   position: absolute;
   left: -16px;
   top: 8px;
+}
+
+/***** Application Succcess Page*****/
+.success-check-icon-container {
+  background-color: #fbfbfc;
+  height: 387px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.success-check-icon-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-check-icon {
+  width: 63px;
+  height: 63px;
+  border-radius: 50%;
+  background-color: #34a853;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fbfbfc;
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.success-text-area-width {
+  font-weight: 600;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.success-button-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.success-button {
+  font-weight: 700;
+  margin: 10px 0;
 }

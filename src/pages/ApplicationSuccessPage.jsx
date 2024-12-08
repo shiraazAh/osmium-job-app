@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Segmented, Button } from "antd";
+import { Button } from "antd";
 import {
   LeftOutlined,
   EllipsisOutlined,
   EnvironmentOutlined,
+  CheckOutlined,
 } from "@ant-design/icons";
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
@@ -15,7 +16,6 @@ export default function ApplicationSuccessPage() {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
-  const [selected, setSelected] = useState("Description");
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -92,22 +92,34 @@ export default function ApplicationSuccessPage() {
             </p>
           </div>
         </div>
-      </div>
-      <div>
-        <SecondaryButton
-          className="w-100 shadow"
-          height={50}
-          onClick={handleViewMyApplications}
-        >
-          View My Applications
-        </SecondaryButton>
-        <GradientButton
-          className="w-100 shadow"
-          height={50}
-          onClick={handleFindMoreJobs}
-        >
-          Find More Jobs
-        </GradientButton>
+        <div className="success-check-icon-container">
+          <div className="success-check-icon-center">
+            <div className="success-check-icon">
+              <CheckOutlined />
+            </div>
+          </div>
+          <h6 className="text-center success-text-area-width">
+            Your application request to {jobDetails.company?.name} was
+            successfull!
+          </h6>
+        </div>
+
+        <div className="success-button-container">
+          <SecondaryButton
+            className="w-100 shadow success-button"
+            height={50}
+            onClick={handleViewMyApplications}
+          >
+            View My Applications
+          </SecondaryButton>
+          <GradientButton
+            className="w-100 shadow success-button"
+            height={50}
+            onClick={handleFindMoreJobs}
+          >
+            Find More Jobs
+          </GradientButton>
+        </div>
       </div>
     </div>
   );
