@@ -86,7 +86,7 @@ export default function JobDetailsPage() {
           className="custom-segmented mb-6 "
         />
 
-        <div>
+        <div className="information">
           {selected === "Description" && (
             <div
               className="prose max-w-none"

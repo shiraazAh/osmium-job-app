@@ -283,3 +283,9 @@ h6 {
 .icon-button-ellipsis {
   transform: rotate(90deg);
 }
+
+.information {
+  background-color: #fbfbfc;
+  border-radius: 8px;
+  min-width: 327px;
+}
