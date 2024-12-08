@@ -266,8 +266,17 @@ h6 {
 }
 
 /***** Job Detail Page Segemeneted styling *****/
+.custom-segmented {
+  margin: 20px 0;
+  border-radius: 8px;
+}
 .custom-segmented .ant-segmented-item {
   color: #666;
+  width: 151px;
+  height: 50px;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .custom-segmented .ant-segmented-item-selected {
@@ -288,4 +297,28 @@ h6 {
   background-color: #fbfbfc;
   border-radius: 8px;
   min-width: 327px;
+}
+
+/***** Job Detail Page Bullet points styling *****/
+.custom-list-styling ul,
+.custom-list-styling ol {
+  padding-left: 20px;
+}
+
+.custom-list-styling li {
+  color: inherit;
+  list-style-type: none;
+  position: relative;
+}
+
+.custom-list-styling ul li::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background-color: #007bff;
+  border-radius: 1px;
+  position: absolute;
+  left: -16px;
+  top: 8px;
 }

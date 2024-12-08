@@ -43,7 +43,7 @@ export default function JobDetailsPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 text-center">
+    <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div class="d-flex justify-content-between">
           <Button
@@ -58,12 +58,16 @@ export default function JobDetailsPage() {
             className="mb-4 pl-0 icon-button-ellipsis" // Removed left padding
           ></Button>
         </div>
-        <img
-          src={detailImage}
-          className="w-full h-full object-cover absolute top-0 left-0 "
-        />
-        <h2 className="text-2xl font-bold mb-4">{jobDetails.name}</h2>
-        <h3 className="text-xl text-gray-600 mb-6">
+        <div className="text-center">
+          <img
+            src={detailImage}
+            className="w-full h-full object-cover absolute top-0 left-0 text-center"
+          />
+        </div>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          {jobDetails.name}
+        </h2>
+        <h3 className="text-xl text-gray-600 mb-6 text-center">
           {jobDetails.company?.name}
         </h3>
 
@@ -78,18 +82,18 @@ export default function JobDetailsPage() {
           </div>
         </div>
 
-        <h3 className="job-salary">$K/mo</h3>
+        <h3 className="job-salary text-center">$K/mo</h3>
 
         <Segmented
           options={["Description", "Company"]}
           onChange={(option) => setSelected(option)}
-          className="custom-segmented mb-6 "
+          className="custom-segmented mb-6"
         />
 
         <div className="information">
           {selected === "Description" && (
             <div
-              className="prose max-w-none"
+              className="prose max-w-none custom-list-styling"
               dangerouslySetInnerHTML={{
                 __html: jobDetails.contents || "No description available",
               }}
