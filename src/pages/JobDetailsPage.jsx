@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Segmented, Button } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
+import { LeftOutlined, EllipsisOutlined } from "@ant-design/icons";
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 
@@ -39,17 +39,24 @@ export default function JobDetailsPage() {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 text-center">
       <div className="bg-white shadow-md rounded-lg p-6">
-        <Button
-          type="text"
-          icon={<LeftOutlined />} // Changed icon
-          onClick={handleGoBack}
-          className="mb-4 pl-0 back-button" // Removed left padding
-        ></Button>
+        <div class="d-flex justify-content-between">
+          <Button
+            type="text"
+            icon={<LeftOutlined />} // Changed icon
+            onClick={handleGoBack}
+            className="mb-4 pl-0 icon-button" // Removed left padding
+          ></Button>
+          <Button
+            type="text"
+            icon={<EllipsisOutlined />} // Changed icon
+            className="mb-4 pl-0 icon-button-ellipsis" // Removed left padding
+          ></Button>
+        </div>
         <img
           src={detailImage}
-          className="w-full h-full object-cover absolute top-0 left-0"
+          className="w-full h-full object-cover absolute top-0 left-0 "
         />
         <h2 className="text-2xl font-bold mb-4">{jobDetails.name}</h2>
         <h3 className="text-xl text-gray-600 mb-6">
@@ -59,7 +66,7 @@ export default function JobDetailsPage() {
         <Segmented
           options={["Description", "Company"]}
           onChange={(option) => setSelected(option)}
-          className="custom-segmented mb-6"
+          className="custom-segmented mb-6 "
         />
 
         <div>
