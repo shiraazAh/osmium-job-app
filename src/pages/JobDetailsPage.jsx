@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Segmented, Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 
 export default function JobDetailsPage() {
@@ -46,7 +47,10 @@ export default function JobDetailsPage() {
           onClick={handleGoBack}
           className="mb-4 pl-0 back-button" // Removed left padding
         ></Button>
-
+        <img
+          src={detailImage}
+          className="w-full h-full object-cover absolute top-0 left-0"
+        />
         <h2 className="text-2xl font-bold mb-4">{jobDetails.name}</h2>
         <h3 className="text-xl text-gray-600 mb-6">
           {jobDetails.company?.name}
