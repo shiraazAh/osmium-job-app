@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Segmented, Button } from "antd";
-import { LeftOutlined, EllipsisOutlined } from "@ant-design/icons";
+import {
+  LeftOutlined,
+  EllipsisOutlined,
+  EnvironmentOutlined,
+} from "@ant-design/icons";
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 
@@ -62,6 +66,19 @@ export default function JobDetailsPage() {
         <h3 className="text-xl text-gray-600 mb-6">
           {jobDetails.company?.name}
         </h3>
+
+        <div className="text-center d-flex justify-content-center align-items-center">
+          <div className="job-location d-flex align-items-center">
+            <EnvironmentOutlined className="location-icon" />
+            <p className="location-text">
+              {jobDetails.locations
+                ?.map((location) => location.name)
+                .join(", ") || "No location specified"}
+            </p>
+          </div>
+        </div>
+
+        <h3 className="job-salary">$K/mo</h3>
 
         <Segmented
           options={["Description", "Company"]}
