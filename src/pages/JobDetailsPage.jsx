@@ -44,7 +44,7 @@ export default function JobDetailsPage() {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto py-3">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div class="d-flex justify-content-between">
           <Button
@@ -73,7 +73,7 @@ export default function JobDetailsPage() {
           {jobDetails.company?.name}
         </h3>
 
-        <div className="text-center d-flex justify-content-center align-items-center">
+        <div className="text-center d-flex justify-content-center align-items-center mb-1">
           <div className="job-location d-flex align-items-center">
             <EnvironmentOutlined className="location-icon" />
             <p className="location-text">
@@ -84,7 +84,7 @@ export default function JobDetailsPage() {
           </div>
         </div>
 
-        <h3 className="job-salary text-center">$K/mo</h3>
+        <h3 className="job-salary text-center mb-3">$6000/mo</h3>
         <GradientButton className="w-100 shadow" height={50}>
           Apply
         </GradientButton>
@@ -95,7 +95,7 @@ export default function JobDetailsPage() {
           className="custom-segmented mb-6"
         />
 
-        <div className="information">
+        <div className="information p-3">
           {selected === "Description" && (
             <div
               className="prose max-w-none custom-list-styling"
