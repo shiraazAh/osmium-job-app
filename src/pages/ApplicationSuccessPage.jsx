@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Segmented, Button } from "antd";
+import { Button } from "antd";
 import {
   LeftOutlined,
   EllipsisOutlined,
   EnvironmentOutlined,
+  CheckOutlined,
 } from "@ant-design/icons";
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
+import SecondaryButton from "../components/Buttons/SecondaryButton";
 
-export default function JobDetailsPage() {
+export default function ApplicationSuccessPage() {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
-  const [selected, setSelected] = useState("Description");
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -40,15 +41,19 @@ export default function JobDetailsPage() {
   }
 
   const handleGoBack = () => {
-    navigate("/jobs"); // Go back to the jobs page
+    navigate(`/job/${jobId}`); // Navigate to the success page
   };
 
-  const handleApplyClick = () => {
-    navigate(`/job/${jobId}/success`); // Navigate to the success page
+  const handleViewMyApplications = () => {
+    navigate("/my-applications"); // Navigate to the jobs pages
+  };
+
+  const handleFindMoreJobs = () => {
+    navigate("/jobs"); // Navigate to the jobs pages
   };
 
   return (
-    <div className="container mx-auto py-3">
+    <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div class="d-flex justify-content-between">
           <Button
@@ -77,7 +82,7 @@ export default function JobDetailsPage() {
           {jobDetails.company?.name}
         </h3>
 
-        <div className="text-center d-flex justify-content-center align-items-center mb-1">
+        <div className="text-center d-flex justify-content-center align-items-center">
           <div className="job-location d-flex align-items-center">
             <EnvironmentOutlined className="location-icon" />
             <p className="location-text">
@@ -87,40 +92,33 @@ export default function JobDetailsPage() {
             </p>
           </div>
         </div>
-
-        <h3 className="job-salary text-center mb-3">$6000/mo</h3>
-        <GradientButton
-          className="w-100 shadow detail-apply-button"
-          height={50}
-          onClick={handleApplyClick}
-        >
-          Apply
-        </GradientButton>
-
-        <Segmented
-          options={["Description", "Company"]}
-          onChange={(option) => setSelected(option)}
-          className="custom-segmented mb-6"
-        />
-
-        <div className="information p-3">
-          {selected === "Description" && (
-            <div
-              className="prose max-w-none detail-bullets-list-styling"
-              dangerouslySetInnerHTML={{
-                __html: jobDetails.contents || "No description available",
-              }}
-            />
-          )}
-          {selected === "Company" && (
-            <div>
-              <h4 className="text-xl font-semibold mb-4">About Company</h4>
-              <p>
-                {jobDetails.company?.description ||
-                  "No company description available"}
-              </p>
+        <div className="success-check-icon-container">
+          <div className="success-check-icon-center">
+            <div className="success-check-icon">
+              <CheckOutlined />
             </div>
-          )}
+          </div>
+          <h6 className="text-center success-text-area-width">
+            Your application request to {jobDetails.company?.name} was
+            successfull!
+          </h6>
+        </div>
+
+        <div className="success-button-container">
+          <SecondaryButton
+            className="w-100 shadow success-button"
+            height={50}
+            onClick={handleViewMyApplications}
+          >
+            View My Applications
+          </SecondaryButton>
+          <GradientButton
+            className="w-100 shadow success-button"
+            height={50}
+            onClick={handleFindMoreJobs}
+          >
+            Find More Jobs
+          </GradientButton>
         </div>
       </div>
     </div>

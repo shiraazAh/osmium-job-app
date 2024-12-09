@@ -8,12 +8,11 @@ import { AuthContext } from "react-oidc-context";
 import ProfilePage from "../pages/ProfilePage";
 import JobPagination from "../components/JobPagination";
 import JobDetailsPage from "../pages/JobDetailsPage";
+import ApplicationSuccessPage from "../pages/ApplicationSuccessPage";
 
 export default function AuthenticatedRoutes() {
-  const { name: userName} = useContext(AuthContext)
+  const { name: userName } = useContext(AuthContext);
   const { pathname } = useLocation();
-
-
 
   return (
     <>
@@ -34,6 +33,10 @@ export default function AuthenticatedRoutes() {
               <Route path="/components" element={<ComponentsPage />} />
               <Route path="/jobs" element={<JobPagination />} />
               <Route path="/job/:jobId" element={<JobDetailsPage />} />
+              <Route
+                path="/job/:jobId/success"
+                element={<ApplicationSuccessPage />}
+              />
             </Routes>
           </Layout>
           <BottomBar />
