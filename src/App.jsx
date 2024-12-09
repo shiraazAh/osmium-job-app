@@ -3,9 +3,9 @@ import { Amplify } from "aws-amplify";
 import cognitoAuthConfig from "./aws-exports";
 import AuthenticatedRoutes from "./routes/AuthenticatedRouted";
 import "@aws-amplify/ui-react/styles.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
-import { fetchUserAttributes } from "aws-amplify/auth";
+import { fetchUserAttributes, getCurrentUser } from "aws-amplify/auth";
 import { useEffect, useState } from "react";
 import { AuthContext } from "react-oidc-context";
 
@@ -16,14 +16,30 @@ export default function App() {
   const [userData, setUserData] = useState(null);
   const [authState, setAuthState] = useState(null);
 
-  const getUserDetails = async () => {
+  const getUserDetails = async () => { //get user's name and email
     try {
       const res = await fetchUserAttributes();
       setUserData(res);
+      setSignedIn(true);
     } catch (err) {
       console.log("cs -- error log -- ", err);
     }
   };
+
+  const checkSession = async () => { //check if user already logged in before
+		let user = { attributes: {} }
+		try {
+			user = await getCurrentUser();
+      getUserDetails();
+      setAuthState("signIn")
+		} catch (err) {
+			console.log("cs -- error log -- ", err);
+		}
+  }
+
+  useEffect(() => {
+    checkSession();
+  }, [signedIn]);
 
   return (
     <AuthContext.Provider
@@ -37,7 +53,13 @@ export default function App() {
     >
       {!signedIn && !authState ? (
         <Routes>
-          <Route path="/" element={<WelcomePage setAuthState={setAuthState} />} />
+          <Route
+            path="/"
+            element={<WelcomePage setAuthState={setAuthState} />}
+          />
+          {/* Redirect to Welcome page if user tries 
+          to go to any other page without loging in */}
+          <Route path="/*" element={<Navigate to="/" />} /> 
         </Routes>
       ) : (
         <Authenticator
@@ -45,11 +67,10 @@ export default function App() {
           initialState={authState}
         >
           {() => {
-            if (!signedIn) {
-              getUserDetails();
+
+            if(!signedIn){
               setSignedIn(true);
             }
-
             return (
               <main>
                 <Routes>
