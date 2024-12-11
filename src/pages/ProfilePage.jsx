@@ -27,7 +27,7 @@ export default function ProfilePage() {
         />
       ),
       onClick: () => {
-        // navigate("/edit-profile");
+        navigate("/edit");
       },
     },
     {
