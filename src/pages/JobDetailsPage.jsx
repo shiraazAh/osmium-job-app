@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Segmented, Button } from "antd";
+import { Segmented, Button, message } from "antd";
 import {
   LeftOutlined,
   EllipsisOutlined,
@@ -9,12 +9,37 @@ import {
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
+import { getCurrentUser, fetchAuthSession } from "aws-amplify/auth";
 
 export default function JobDetailsPage() {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
   const [selected, setSelected] = useState("Description");
+  const [isApplying, setIsApplying] = useState(false);
+  const [authToken, setAuthToken] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const fetchUserAuth = async () => {
+      try {
+        const { userId } = await getCurrentUser();
+
+        try {
+          const { tokens } = await fetchAuthSession();
+          setAuthToken(tokens.accessToken);
+          setUserId(userId);
+        } catch (tokenError) {
+          console.warn("Modern token fetch failed, trying alternative method");
+        }
+      } catch (error) {
+        console.error("Authentication error:", error);
+        message.error("Please log in to continue");
+      }
+    };
+
+    fetchUserAuth();
+  }, []);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -43,8 +68,49 @@ export default function JobDetailsPage() {
     navigate("/jobs"); // Go back to the jobs page
   };
 
-  const handleApplyClick = () => {
-    navigate(`/job/${jobId}/success`); // Navigate to the success page
+  const handleSubmitApplication = async () => {
+    // Check if user is authenticated
+    if (!authToken || !userId) {
+      message.error("Please log in to apply for this job");
+      return;
+    }
+
+    // Prevent multiple submissions
+    if (isApplying) return;
+
+    setIsApplying(true);
+
+    try {
+      const response = await fetch("/application", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({
+          userId: userId,
+          jobId: jobId,
+          jobName: jobDetails.name,
+          company: jobDetails.company?.name,
+          status: 0,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(errorBody || "Failed to submit application");
+      }
+
+      // Navigate to success page
+      navigate(`/job/${jobId}/success`);
+    } catch (error) {
+      console.error("Application submission error:", error);
+      message.error(
+        error.message || "Failed to submit application. Please try again."
+      );
+    } finally {
+      setIsApplying(false);
+    }
   };
 
   return (
@@ -92,9 +158,10 @@ export default function JobDetailsPage() {
         <GradientButton
           className="w-100 shadow detail-apply-button"
           height={50}
-          onClick={handleApplyClick}
+          onClick={handleSubmitApplication}
+          disabled={isApplying || !authToken}
         >
-          Apply
+          {isApplying ? "Applying..." : "Apply"}
         </GradientButton>
 
         <Segmented
