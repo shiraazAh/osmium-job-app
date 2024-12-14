@@ -103,9 +103,9 @@ export default function AllJobsPage() {
           </GradientButton>
         </Card>
       </div>
-      <div className="my-5">
-        <div className="d-flex flex-row justify-content-between align-items-center mt-5 ">
-          <p className="font-weight-bold">Recomendations</p>
+      <div className="mt-4 mb-5">
+        <div className="d-flex flex-row justify-content-between align-items-center mb-2">
+          <p className="font-weight-bold mb-0">Recomendations</p>
           <Button
             onClick={handleSeeAllClick}
             type="link"
