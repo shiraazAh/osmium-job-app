@@ -49,7 +49,7 @@ export default function JobDetailsPage() {
 
   return (
     <div className="container mx-auto py-3">
-      <div className="bg-white shadow-md rounded-lg p-6">
+      <div className="bg-white shadow-md rounded-lg">
         <div class="d-flex justify-content-between">
           <Button
             type="text"
