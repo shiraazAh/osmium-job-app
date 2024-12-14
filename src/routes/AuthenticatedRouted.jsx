@@ -9,6 +9,7 @@ import ProfilePage from "../pages/ProfilePage";
 import JobPagination from "../components/JobPagination";
 import JobDetailsPage from "../pages/JobDetailsPage";
 import ApplicationSuccessPage from "../pages/ApplicationSuccessPage";
+import EditProfilePage from "../pages/EditProfilePage";
 import MyApplicationsPage from "../pages/MyApplicationsPage";
 
 export default function AuthenticatedRoutes() {
@@ -39,6 +40,7 @@ export default function AuthenticatedRoutes() {
                 path="/job/:jobId/success"
                 element={<ApplicationSuccessPage />}
               />
+              <Route path="/edit" element={<EditProfilePage />} />
             </Routes>
           </Layout>
           <BottomBar />
