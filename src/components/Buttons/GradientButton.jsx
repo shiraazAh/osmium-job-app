@@ -1,6 +1,8 @@
 import React, { Children } from "react";
 import { Button, ConfigProvider, Space } from "antd";
 import { createStyles } from "antd-style";
+import "../../styles.css";
+
 const useStyle = createStyles(({ prefixCls, css }) => ({
   linearGradientButton: css`
     &.${prefixCls}-btn-primary:not([disabled]):not(
@@ -34,6 +36,7 @@ const GradientButton = ({
   height = 40,
   disabled = false,
   onClick = () => {},
+  loading = false,
 }) => {
   const { styles } = useStyle();
   return (
@@ -43,12 +46,13 @@ const GradientButton = ({
       }}
     >
       <Button
-        className={className ? className : ""}
+        className={`${className && className} btn-grad-disabled`}
         onClick={onClick}
         style={{ height: height }}
         type="primary"
         size="large"
         disabled={disabled}
+        loading={loading}
       >
         {children}
       </Button>
