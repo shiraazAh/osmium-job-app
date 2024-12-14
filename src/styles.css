@@ -96,7 +96,7 @@ h6 {
 
 /* Container styles  JOB CARDS */
 .job-card {
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 0px;
@@ -275,7 +275,6 @@ h6 {
   color: #666;
   width: 100%;
   height: 50px;
-  margin: 5px;
   padding: 10px;
   border-radius: 8px;
 }
@@ -333,15 +332,18 @@ h6 {
 /***** Application Succcess Page*****/
 .success-check-icon-container {
   background-color: #fbfbfc;
-  height: 387px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 20px 0;
+  padding: 100px 0;
 }
 .success-check-icon-center {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 10px;
 }
 
 .success-check-icon {
@@ -354,13 +356,13 @@ h6 {
   justify-content: center;
   color: #fbfbfc;
   font-size: 35px;
-  margin-bottom: 20px;
 }
 
 .success-text-area-width {
   font-weight: 600;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .success-button-container {

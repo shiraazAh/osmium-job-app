@@ -55,7 +55,7 @@ export default function ApplicationSuccessPage() {
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6">
-        <div class="d-flex justify-content-between">
+        <div className="d-flex justify-content-between">
           <Button
             type="text"
             icon={<LeftOutlined />} // Changed icon

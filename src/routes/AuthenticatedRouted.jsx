@@ -10,6 +10,7 @@ import JobPagination from "../components/JobPagination";
 import JobDetailsPage from "../pages/JobDetailsPage";
 import ApplicationSuccessPage from "../pages/ApplicationSuccessPage";
 import EditProfilePage from "../pages/EditProfilePage";
+import MyApplicationsPage from "../pages/MyApplicationsPage";
 
 export default function AuthenticatedRoutes() {
   const { name: userName } = useContext(AuthContext);
@@ -32,6 +33,7 @@ export default function AuthenticatedRoutes() {
               <Route path="/" element={<AllJobsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/components" element={<ComponentsPage />} />
+              <Route path="/my-applications" element={<MyApplicationsPage />} />
               <Route path="/jobs" element={<JobPagination />} />
               <Route path="/job/:jobId" element={<JobDetailsPage />} />
               <Route
