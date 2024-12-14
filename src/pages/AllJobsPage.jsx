@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
 import { useNavigate } from "react-router-dom"; // Ensure this import is added
 import "../styles.css";
+import jobData from "../utils/jobData.json";
 
 const { Search } = Input;
 
@@ -18,6 +19,10 @@ export default function AllJobsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
+  const [jobCategory, setJobCategory] = useState(null);
+  const [jobLocation, setJobLocation] = useState(null);
+  const [jobLevel, setJobLevel] = useState(null);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   useEffect(() => {
     const fetchPage = async (pageNumber) => {
@@ -45,6 +50,48 @@ export default function AllJobsPage() {
     fetchPage(page);
   }, [page]);
 
+  const handleSearch = async() => {
+      setButtonLoading(true);
+
+      try {
+        const response = await fetch(
+          `https://www.themuse.com/api/public/jobs?page=0&per_page=10&${getParameters()}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const fetchedData = await response.json();
+        setData(fetchedData.results.slice(0, 10));
+        setJobCategory(null);
+        setJobLocation(null);
+        setJobLevel(null);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setButtonLoading(false);
+      }
+    };
+
+  const getParameters = () => {
+    const params = [];
+    if (jobCategory) {
+      params.push(`category=${jobCategory}`);
+    }
+    if (jobLocation) {
+      params.push(`location=${jobLocation}`);
+    }
+    if (jobLevel) {
+      params.push(`level=${jobLevel}`);
+    }
+    return params.join("&");
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+  };  
+
   const handleJobSelect = (jobId) => {
     // Navigate to the job details page using the job ID
     navigate(`/job/${jobId}`);
@@ -63,9 +110,9 @@ export default function AllJobsPage() {
         Search & Land on your dream job
       </h2>
       <div className="d-flex justify-content-center mt-4">
-        <Card className="shadow-sm" style={{ width: "100%", height: 230 }}>
+        <Card className="shadow-sm" style={{ width: "100%", height: 240 }}>
           {/*** Inputs ***/}
-          <Input
+          {/* <Input
             placeholder="Search Job"
             allowClear
             size="large"
@@ -73,43 +120,47 @@ export default function AllJobsPage() {
             variant="borderless"
             prefix={<SearchOutlined className="me-1" />}
             style={{ width: 200 }}
+          /> */}
+          <AutoCompleteSelect
+            options={jobData.job_categories}
+            icon={<SearchOutlined className="me-1" />}
+            placeholder="Search Job"
+            onChange={(value) => setJobCategory(value)}
+            value={jobCategory}
           />
-          <Select
-            placeholder="Job Type"
-            className="w-100 filter-inputs px-0 mb-2"
-            rootClassName="px-0"
-            variant="borderless"
-            style={{ flex: 1 }}
-            prefix={<FilterOutlined className="me-1" />}
-            size="large"
-            options={[
-              { value: "1", label: "Health" },
-              { value: "2", label: "Engineering" },
-              { value: "3", label: "Human Relations" },
-            ]}
+          <AutoCompleteSelect
+            options={jobData.job_levels}
+            icon={<FilterOutlined className="me-1" />}
+            placeholder="Job Level"
+            onChange={(value) => setJobLevel(value)}
+            value={jobLevel}
           />
-          <Input
+          <AutoCompleteSelect
+            options={jobData.locations}
+            icon={<EnvironmentOutlined className="me-1" />}
             placeholder="Location"
-            allowClear
-            size="large"
-            className="w-100 px-0 mb-2"
-            variant="borderless"
-            prefix={<EnvironmentOutlined className="me-1" />}
-            // onSearch={onSearch}
-            style={{ width: 200 }}
+            onChange={(value) => setJobLocation(value)}
+            border={false}
+            value={jobLocation}
           />
-          <GradientButton className="w-100 shadow" height={50}>
+          <GradientButton
+            className="w-100 shadow"
+            height={50}
+            onClick={() => handleSearch()}
+            loading={buttonLoading}
+            disabled={(!jobCategory && !jobLocation && !jobLevel)}
+          >
             Search Job
           </GradientButton>
         </Card>
       </div>
-      <div className="my-5">
-        <div className="d-flex flex-row justify-content-between align-items-center mt-5 ">
-          <p className="font-weight-bold">Recomendations</p>
+      <div className="mt-4 mb-5">
+        <div className="d-flex flex-row justify-content-between align-items-center mb-2">
+          <p className="font-weight-bold mb-0">Recomendations</p>
           <Button
             onClick={handleSeeAllClick}
             type="link"
-            className="text-decoration"
+            className=" p-0"
           >
             See All
           </Button>
@@ -130,9 +181,43 @@ export default function AllJobsPage() {
             levels={
               job.levels?.map((level) => level.name).join(", ") || "No levels"
             }
+
           />
         ))}
       </div>
     </>
   );
 }
+
+// JobCategorySelect component with sorting
+const AutoCompleteSelect = ({
+  options,
+  icon,
+  placeholder,
+  border = true,
+  onChange,
+  value = null,
+}) => (
+  <Select
+    allowClear
+    showSearch
+    className="filter-inputs w-100 mb-2"
+    style={{ borderBottom: border ? "1px solid #d9d9d9" : "none" }}
+    placeholder={placeholder}
+    value={value}
+    prefix={icon}
+    optionFilterProp="label"
+    optionFontSize={16}
+    onChange={onChange}
+    size="large"
+    filterSort={(optionA, optionB) =>
+      (optionA?.label ?? "")
+        .toLowerCase()
+        .localeCompare((optionB?.label ?? "").toLowerCase())
+    }
+    options={options.map((category) => ({
+      value: category,
+      label: category,
+    }))}
+  />
+);

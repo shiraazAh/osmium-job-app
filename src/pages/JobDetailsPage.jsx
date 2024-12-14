@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Segmented, Button, message } from "antd";
+import { Segmented, Button, message, Flex, Spin } from "antd";
 import {
   LeftOutlined,
   EllipsisOutlined,
@@ -17,7 +17,7 @@ export default function JobDetailsPage() {
   const [jobDetails, setJobDetails] = useState(null);
   const [selected, setSelected] = useState("Description");
   const [isApplying, setIsApplying] = useState(false);
-  const  { sub: userId } = useContext(AuthContext);
+  const { sub: userId } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -39,7 +39,11 @@ export default function JobDetailsPage() {
   }, [jobId]); // Fetch job details when jobId changes
 
   if (!jobDetails) {
-    return <div>Loading job details...</div>;
+    return (
+      <Flex justify="center" align="center" style={{ height: "70vh" }}>
+        <Spin size="large" />
+      </Flex>
+    );
   }
 
   const handleGoBack = () => {
@@ -162,3 +166,4 @@ export default function JobDetailsPage() {
     </div>
   );
 }
+;
