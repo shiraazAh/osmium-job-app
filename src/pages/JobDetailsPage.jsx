@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Segmented, Button } from "antd";
+import { Segmented, Button, message } from "antd";
 import {
   LeftOutlined,
   EllipsisOutlined,
@@ -9,12 +9,15 @@ import {
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
+import { AuthContext } from "react-oidc-context";
 
 export default function JobDetailsPage() {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
   const [selected, setSelected] = useState("Description");
+  const [isApplying, setIsApplying] = useState(false);
+  const  { sub: userId } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -43,8 +46,40 @@ export default function JobDetailsPage() {
     navigate("/jobs"); // Go back to the jobs page
   };
 
-  const handleApplyClick = () => {
-    navigate(`/job/${jobId}/success`); // Navigate to the success page
+  const handleSubmitApplication = async () => {
+
+    setIsApplying(true);
+
+    try {
+      const response = await fetch("/application", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          jobId: jobId,
+          jobName: jobDetails.name,
+          company: jobDetails.company?.name,
+          status: 0,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(errorBody || "Failed to submit application");
+      }
+
+      // Navigate to success page
+      navigate(`/job/${jobId}/success`);
+    } catch (error) {
+      console.error("Application submission error:", error);
+      message.error(
+        error.message || "Failed to submit application. Please try again."
+      );
+    } finally {
+      setIsApplying(false);
+    }
   };
 
   return (
@@ -92,9 +127,10 @@ export default function JobDetailsPage() {
         <GradientButton
           className="w-100 shadow detail-apply-button"
           height={50}
-          onClick={handleApplyClick}
+          onClick={handleSubmitApplication}
+          disabled={isApplying}
         >
-          Apply
+          {isApplying ? "Applying..." : "Apply"}
         </GradientButton>
 
         <Segmented

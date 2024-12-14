@@ -49,7 +49,7 @@ export default function JobPagination() {
   };
 
   return (
-    <div className="mx-auto px-4 py-3">
+    <div className="mx-auto py-3">
       <h1>Jobs</h1>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}

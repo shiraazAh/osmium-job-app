@@ -1,4 +1,4 @@
-import { Card, Select } from "antd";
+import { Card, Select, Button } from "antd";
 import { Input } from "antd";
 import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import EnvironmentOutlined from "@ant-design/icons/EnvironmentOutlined";
@@ -103,10 +103,16 @@ export default function AllJobsPage() {
           </GradientButton>
         </Card>
       </div>
-      <div className="my-5">
-        <div className="d-flex flex-row justify-content-between align-items-center mt-5 ">
-          <h4 className="">Recomendations</h4>
-          <a onClick={handleSeeAllClick}>See All</a>
+      <div className="mt-4 mb-5">
+        <div className="d-flex flex-row justify-content-between align-items-center mb-2">
+          <p className="font-weight-bold mb-0">Recomendations</p>
+          <Button
+            onClick={handleSeeAllClick}
+            type="link"
+            className="text-decoration"
+          >
+            See All
+          </Button>
         </div>
 
         {data.map((job) => (
