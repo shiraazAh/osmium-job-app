@@ -32,6 +32,7 @@ const GradientButton = ({
   children,
   className,
   height = 40,
+  disabled = false,
   onClick = () => {},
 }) => {
   const { styles } = useStyle();
@@ -47,6 +48,7 @@ const GradientButton = ({
         style={{ height: height }}
         type="primary"
         size="large"
+        disabled={disabled}
       >
         {children}
       </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Segmented, Button, message } from "antd";
 import {
@@ -9,7 +9,7 @@ import {
 import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
-import { getCurrentUser, fetchAuthSession } from "aws-amplify/auth";
+import { AuthContext } from "react-oidc-context";
 
 export default function JobDetailsPage() {
   const navigate = useNavigate();
@@ -17,29 +17,7 @@ export default function JobDetailsPage() {
   const [jobDetails, setJobDetails] = useState(null);
   const [selected, setSelected] = useState("Description");
   const [isApplying, setIsApplying] = useState(false);
-  const [authToken, setAuthToken] = useState(null);
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    const fetchUserAuth = async () => {
-      try {
-        const { userId } = await getCurrentUser();
-
-        try {
-          const { tokens } = await fetchAuthSession();
-          setAuthToken(tokens.accessToken);
-          setUserId(userId);
-        } catch (tokenError) {
-          console.warn("Modern token fetch failed, trying alternative method");
-        }
-      } catch (error) {
-        console.error("Authentication error:", error);
-        message.error("Please log in to continue");
-      }
-    };
-
-    fetchUserAuth();
-  }, []);
+  const  { sub: userId } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -69,14 +47,6 @@ export default function JobDetailsPage() {
   };
 
   const handleSubmitApplication = async () => {
-    // Check if user is authenticated
-    if (!authToken || !userId) {
-      message.error("Please log in to apply for this job");
-      return;
-    }
-
-    // Prevent multiple submissions
-    if (isApplying) return;
 
     setIsApplying(true);
 
@@ -85,7 +55,6 @@ export default function JobDetailsPage() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({
           userId: userId,
@@ -159,7 +128,7 @@ export default function JobDetailsPage() {
           className="w-100 shadow detail-apply-button"
           height={50}
           onClick={handleSubmitApplication}
-          disabled={isApplying || !authToken}
+          disabled={isApplying}
         >
           {isApplying ? "Applying..." : "Apply"}
         </GradientButton>
