@@ -117,7 +117,7 @@ h6 {
   flex-direction: column;
   padding: 0px;
   border: 1px solid #e0e3ea;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 /* Top section styles */
@@ -255,6 +255,11 @@ h6 {
   margin-left: 5px;
 }
 /** THIS IS THE END OF THE JOB CARDS ***/
+
+/** MY APPLICATION CARD **/
+.Status {
+  margin-bottom: 15px;
+}
 
 /***** Modal *****/
 .main-button-modal {

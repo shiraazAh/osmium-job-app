@@ -3,6 +3,15 @@ import { Card, Button } from "antd";
 import { EnvironmentOutlined, HeartOutlined } from "@ant-design/icons";
 import "../styles.css"; 
 
+
+/* helper function to shorten title and location*/
+const shortenText = (text, maxlength) => {
+if(text.length <= maxlength){
+  return text;
+}
+return text.slice(0, maxlength) + "...";
+};
+
 const JobCard = ({
   onClick,
   title,
@@ -11,7 +20,7 @@ const JobCard = ({
   salary, /** Still working on the salary **/
 }) => {
   return (
-    <Card className="job-card" hoverable bodyStyle= {{padding: "20px"}} onClick={onClick}>
+    <Card className="job-card" hoverable bodyStyle= {{padding: "15px"}} onClick={onClick}>
       {/* Top Section */}
       <div className="job-card-top">
         <div className="job-card-left">
@@ -22,7 +31,7 @@ const JobCard = ({
           />
           <div>
             <p className="company-name">{company}</p>
-            <h5  className="job-title">{title}</h5>
+            <h5  className="job-title">{shortenText(title, 70)}</h5>
           </div>
         </div >
         <Button type="text" icon={<HeartOutlined />}  className="save-button" />
@@ -32,7 +41,7 @@ const JobCard = ({
       <div className="job-card-bottom">
         <div className="job-location">
           <EnvironmentOutlined className="location-icon" />
-          <p className="location-text">{location}</p>
+          <p className="location-text">{shortenText(location, 35)}</p>
         </div>
         <h3 className="job-salary">$K/mo</h3>
       </div>
