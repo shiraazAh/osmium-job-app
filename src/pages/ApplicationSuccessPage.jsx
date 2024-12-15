@@ -53,7 +53,7 @@ export default function ApplicationSuccessPage() {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto py-3">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="d-flex justify-content-between">
           <Button

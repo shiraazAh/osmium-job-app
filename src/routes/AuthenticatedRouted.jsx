@@ -23,9 +23,10 @@ export default function AuthenticatedRoutes() {
           <Layout
             style={{
               minHeight: "100vh",
-              maxWidth: "375px",
+              maxWidth: "900px",
               margin: "0 auto",
               padding: "0 20px",
+              paddingBottom: "70px",
               ...(pathname === "/profile" && { background: "#c8d6e528" }),
             }}
           >

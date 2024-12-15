@@ -3,6 +3,10 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+#root {
+  overflow-x: hidden;
+}
+
 /***** Basic ****/
 h1,
 h2,
@@ -32,11 +36,23 @@ h6 {
   border-left: 0;
   border-right: 0;
   border-radius: 0px;
+  font-size: 16px !important;
+}
+
+.filter-inputs .ant-select-selector:focus {
+  box-shadow: none !important;
 }
 
 .filter-inputs .ant-select-selector {
   padding-left: 0px !important;
   padding-right: 0px !important;
+  border: none !important;
+}
+
+.btn-grad-disabled:disabled {
+  opacity: 0.5;
+  background: radial-gradient(#54a0ff, #3081d0);
+  color: white;
 }
 
 /***** Profile Page *****/
