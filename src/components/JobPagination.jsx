@@ -54,25 +54,23 @@ export default function JobPagination() {
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
-      <ul>
-        {data.map((job) => (
-          <JobCard
-            key={job.id}
-            onClick={() => handleJobSelect(job.id)} // Pass only the job ID to navigate
-            title={job.name}
-            company={job.company?.name || "No company listed"}
-            location={
-              job.locations?.map((location) => location.name).join(", ") ||
-              "No location"
-            }
-            description={job.contents || "No description available"}
-            publicationDate={job.publication_date || "No date available"}
-            levels={
-              job.levels?.map((level) => level.name).join(", ") || "No levels"
-            }
-          />
-        ))}
-      </ul>
+      {data.map((job) => (
+        <JobCard
+          key={job.id}
+          onClick={() => handleJobSelect(job.id)} // Pass only the job ID to navigate
+          title={job.name}
+          company={job.company?.name || "No company listed"}
+          location={
+            job.locations?.map((location) => location.name).join(", ") ||
+            "No location"
+          }
+          description={job.contents || "No description available"}
+          publicationDate={job.publication_date || "No date available"}
+          levels={
+            job.levels?.map((level) => level.name).join(", ") || "No levels"
+          }
+        />
+      ))}
 
       <div className="d-flex justify-content-center mt-4 align-items-center">
         <Pagination

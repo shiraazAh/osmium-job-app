@@ -1,20 +1,62 @@
 import { Card, Select } from "antd";
-import React from "react";
 import { Input } from "antd";
 import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import EnvironmentOutlined from "@ant-design/icons/EnvironmentOutlined";
 import FilterOutlined from "@ant-design/icons/FilterOutlined";
 import GradientButton from "../components/Buttons/GradientButton";
 import CustomNavbar from "../components/Navbar";
+import React, { useState, useEffect } from "react";
+import JobCard from "../components/JobCard";
+import { useNavigate } from "react-router-dom"; // Ensure this import is added
+import "../styles.css";
 
 const { Search } = Input;
 
 export default function AllJobsPage() {
+  const navigate = useNavigate(); // Use useNavigate here
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const fetchPage = async (pageNumber) => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(
+          `https://www.themuse.com/api/public/jobs?page=${pageNumber}&per_page=10`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const fetchedData = await response.json();
+        setData(fetchedData.results.slice(0, 10));
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPage(page);
+  }, [page]);
+
+  const handleJobSelect = (jobId) => {
+    // Navigate to the job details page using the job ID
+    navigate(`/job/${jobId}`);
+  };
+
+  const handleSeeAllClick = () => {
+    navigate(`/jobs`); // Navigate to the success page
+  };
+
   return (
     <>
-      <div
-        className="position-relative"
-      >
+      <div className="position-relative">
         <CustomNavbar />
       </div>
       <h2 className="text-white mt-3 fw-bold">
@@ -60,6 +102,30 @@ export default function AllJobsPage() {
             Search Job
           </GradientButton>
         </Card>
+      </div>
+      <div className="my-5">
+        <div className="d-flex flex-row justify-content-between align-items-center mt-5 ">
+          <h4 className="">Recomendations</h4>
+          <a onClick={handleSeeAllClick}>See All</a>
+        </div>
+
+        {data.map((job) => (
+          <JobCard
+            key={job.id}
+            onClick={() => handleJobSelect(job.id)} // Pass only the job ID to navigate
+            title={job.name}
+            company={job.company?.name || "No company listed"}
+            location={
+              job.locations?.map((location) => location.name).join(", ") ||
+              "No location"
+            }
+            description={job.contents || "No description available"}
+            publicationDate={job.publication_date || "No date available"}
+            levels={
+              job.levels?.map((level) => level.name).join(", ") || "No levels"
+            }
+          />
+        ))}
       </div>
     </>
   );
