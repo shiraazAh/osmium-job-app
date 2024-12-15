@@ -21,7 +21,7 @@ h6 {
 .navbar-container {
   height: 50px;
   /* margin-top: 25px; */
-}
+} 
 
 .navbar-bg-extend {
   width: 100vw !important;
@@ -404,7 +404,7 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: center; 
   height: 100vh; 
   padding: 20px; 
   gap: 20px; 
@@ -414,17 +414,20 @@ h6 {
 .Edit-Heading {
   font-size: 24px;
   font-weight: bold;
-  margin-top: 30px;
-  margin-bottom: 30px; 
+  margin-top: 30px; 
+  margin-bottom: 10px; 
+  margin-left: 185px; 
   text-align: left;
 }
+
+
 
 /* Center Ellipse */
 .Ellipse-Image {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 0 auto;
   
 }
 
@@ -435,6 +438,8 @@ h6 {
   border-radius: 50%;
   overflow: hidden;
   object-fit: cover;
+  display: block; 
+  margin: 0 auto;
 }
 
 /* Card Styling */
@@ -446,8 +451,7 @@ h6 {
   border-radius: 8px;
   box-shadow: 0px 1px 2px 0px #9393931A;
   max-width: 400px; 
-  margin-top: 25px;
-  margin-bottom: 70px;
+  margin: 25px auto 70px auto;
   background: #FFFFFF;
 }
 
@@ -506,6 +510,8 @@ input {
   margin-top: auto; 
   width: 100%;
   max-width: 400px; 
+  margin-left: auto; 
+  margin-right: auto; 
 }
 
 .SaveButton, .CancelButton {
@@ -513,5 +519,6 @@ input {
   height: 50px; 
   box-shadow: 0px 11px 11px 0px #3081D021; 
   border-width: 2px;
+  margin: 0;
 }
 
