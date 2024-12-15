@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "antd";
 import { EnvironmentOutlined, HeartOutlined } from "@ant-design/icons";
-import "../styles.css"; 
+import "../../styles.css"; 
 
 
 /* helper function to shorten title and location*/

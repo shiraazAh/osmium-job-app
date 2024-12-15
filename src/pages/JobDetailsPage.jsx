@@ -47,7 +47,7 @@ export default function JobDetailsPage() {
   }
 
   const handleGoBack = () => {
-    navigate("/jobs"); // Go back to the jobs page
+   window.history.back(); // Go back to the jobs page
   };
 
   const handleSubmitApplication = async () => {
@@ -65,7 +65,7 @@ export default function JobDetailsPage() {
           jobId: jobId,
           jobName: jobDetails.name,
           company: jobDetails.company?.name,
-          status: 0,
+          status: Math.floor(Math.random() * 3),
         }),
       });
 

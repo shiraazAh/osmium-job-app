@@ -6,10 +6,11 @@ import FilterOutlined from "@ant-design/icons/FilterOutlined";
 import GradientButton from "../components/Buttons/GradientButton";
 import CustomNavbar from "../components/Navbar";
 import React, { useState, useEffect } from "react";
-import JobCard from "../components/JobCard";
+import JobCard from "../components/Cards/JobCard";
 import { useNavigate } from "react-router-dom"; // Ensure this import is added
 import "../styles.css";
 import jobData from "../utils/jobData.json";
+import { getParameters } from "../utils/helpers";
 
 const { Search } = Input;
 
@@ -51,41 +52,7 @@ export default function AllJobsPage() {
   }, [page]);
 
   const handleSearch = async() => {
-      setButtonLoading(true);
-
-      try {
-        const response = await fetch(
-          `https://www.themuse.com/api/public/jobs?page=0&per_page=10&${getParameters()}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const fetchedData = await response.json();
-        setData(fetchedData.results.slice(0, 10));
-        setJobCategory(null);
-        setJobLocation(null);
-        setJobLevel(null);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setButtonLoading(false);
-      }
-    };
-
-  const getParameters = () => {
-    const params = [];
-    if (jobCategory) {
-      params.push(`category=${jobCategory}`);
-    }
-    if (jobLocation) {
-      params.push(`location=${jobLocation}`);
-    }
-    if (jobLevel) {
-      params.push(`level=${jobLevel}`);
-    }
-    return params.join("&");
+      navigate(`/jobs?${getParameters(jobCategory, jobLocation, jobLevel)}`);
   };
 
   const handlePageChange = (pageNumber) => {

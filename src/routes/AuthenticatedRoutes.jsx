@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { Layout, Spin } from "antd";
 import AllJobsPage from "../pages/AllJobsPage";
 import ComponentsPage from "../pages/ComponentsPage";
-import BottomBar from "../components/BottomBar";
+import BottomBar from "../components/Containers/BottomBar";
 import { useContext } from "react";
 import { AuthContext } from "react-oidc-context";
 import ProfilePage from "../pages/ProfilePage";
