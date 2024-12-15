@@ -65,7 +65,7 @@ export default function JobDetailsPage() {
           jobId: jobId,
           jobName: jobDetails.name,
           company: jobDetails.company?.name,
-          status: 0,
+          status: Math.floor(Math.random() * 3),
         }),
       });
 

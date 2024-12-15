@@ -64,6 +64,7 @@ export default function App() {
         </Routes>
       ) : (
         <Authenticator
+        className="mt-5"
           signUpAttributes={["email", "name"]}
           initialState={authState}
         >

@@ -10,7 +10,7 @@ export default function WelcomePage({ setAuthState }) {
       <Layout
         style={{
           minHeight: "100vh",
-          maxWidth: "375px",
+          // maxWidth: "900px",
           margin: "0 auto",
           padding: "0 20px",
           background: "#F8F8F8",
@@ -28,22 +28,29 @@ export default function WelcomePage({ setAuthState }) {
               Every job search is a journey of growth and opportunity. And we
               make sure you find it quickly and easily.
             </p>
-
-            <GradientButton
-              className="w-100"
-              height={50}
-              onClick={() => setAuthState("signUp")}
-            >
-              Get Started
-            </GradientButton>
-
-            <SecondaryButton
-              className="w-100 mt-3"
-              height={50}
-              onClick={() => setAuthState("signIn")}
-            >
-              Have an account? Login
-            </SecondaryButton>
+            <div className="row">
+              <div className="col-12 col-lg-12">
+                {" "}
+                <GradientButton
+                  className="w-100"
+                  style={{ maxWidth: "340px" }}
+                  height={50}
+                  onClick={() => setAuthState("signUp")}
+                >
+                  Get Started
+                </GradientButton>
+              </div>
+              <div className="col-12 col-lg-12 mt-3">
+                <SecondaryButton
+                  className="w-100"
+                  style={{ maxWidth: "340px" }}
+                  height={50}
+                  onClick={() => setAuthState("signIn")}
+                >
+                  Have an account? Login
+                </SecondaryButton>
+              </div>
+            </div>
           </div>
         </div>
       </Layout>

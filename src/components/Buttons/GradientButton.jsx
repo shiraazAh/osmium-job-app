@@ -34,6 +34,7 @@ const GradientButton = ({
   children,
   className,
   height = 40,
+  style = {},
   disabled = false,
   onClick = () => {},
   loading = false,
@@ -48,7 +49,7 @@ const GradientButton = ({
       <Button
         className={`${className && className} btn-grad-disabled`}
         onClick={onClick}
-        style={{ height: height }}
+        style={{ height: height, ...style }}
         type="primary"
         size="large"
         disabled={disabled}
