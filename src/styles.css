@@ -55,6 +55,10 @@ h6 {
   color: white;
 }
 
+.ant-select-focused:where(.css-dev-only-do-not-override-1dfwb79).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+  box-shadow: none !important;
+}
+
 /***** Profile Page *****/
 
 .profile-page-icon-sizing {
@@ -410,16 +414,6 @@ h6 {
   gap: 20px; 
 }
 
-/* Heading */
-.Edit-Heading {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 30px; 
-  margin-bottom: 10px; 
-  margin-left: 185px; 
-  text-align: left;
-}
-
 
 
 /* Center Ellipse */
@@ -451,7 +445,7 @@ h6 {
   border-radius: 8px;
   box-shadow: 0px 1px 2px 0px #9393931A;
   max-width: 400px; 
-  margin: 25px auto 70px auto;
+  margin: 25px auto 30px auto;
   background: #FFFFFF;
 }
 
@@ -475,7 +469,6 @@ h6 {
   font-weight: bold;
   font-size: 16px;
   letter-spacing: 1%;
-  line-height: 20.16px;
   margin: 0;
 }
 
@@ -497,8 +490,8 @@ input {
 
 .divider {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
-  margin-top: 15px;
-  margin-bottom: 20px; 
+  margin-top: 3px;
+  margin-bottom: 7px; 
 }
 
 

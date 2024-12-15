@@ -47,7 +47,7 @@ export default function JobDetailsPage() {
   }
 
   const handleGoBack = () => {
-    navigate("/jobs"); // Go back to the jobs page
+   window.history.back(); // Go back to the jobs page
   };
 
   const handleSubmitApplication = async () => {

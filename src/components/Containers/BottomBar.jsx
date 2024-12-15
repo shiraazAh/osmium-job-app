@@ -8,7 +8,7 @@ import {
   HomeIconOutlined,
   ApplicationsIconFilled,
   ApplicationsIconOutlined
-} from "../assets/bottombar";
+} from "../../assets/bottombar";
 import { NavLink, useLocation } from 'react-router-dom';
 
 export default function BottomBar() {

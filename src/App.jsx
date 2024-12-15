@@ -1,7 +1,7 @@
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import cognitoAuthConfig from "./aws-exports";
-import AuthenticatedRoutes from "./routes/AuthenticatedRouted";
+import AuthenticatedRoutes from "./routes/AuthenticatedRoutes";
 import "@aws-amplify/ui-react/styles.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
@@ -49,6 +49,7 @@ export default function App() {
           setSignedIn(false);
           setAuthState(null);
         },
+        getUserDetails,
       }}
     >
       {!signedIn && !authState ? (
@@ -59,7 +60,7 @@ export default function App() {
           />
           {/* Redirect to Welcome page if user tries 
           to go to any other page without loging in */}
-          <Route path="/*" element={<Navigate to="/" />} /> 
+          <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       ) : (
         <Authenticator
@@ -67,8 +68,7 @@ export default function App() {
           initialState={authState}
         >
           {() => {
-
-            if(!signedIn){
+            if (!signedIn) {
               setSignedIn(true);
             }
             return (
