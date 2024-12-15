@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Ensure this import is added
 import JobCard from "./JobCard";
-import { Pagination } from "antd";
+import { Flex, Pagination, Spin } from "antd";
 import "../styles.css";
 
 export default function JobPagination() {
@@ -49,43 +49,48 @@ export default function JobPagination() {
   };
 
   return (
-    <div className="mx-auto px-4 py-3">
-      <h1>Jobs</h1>
-      {isLoading && <p>Loading...</p>}
+    <div className="py-3">
+      <h1 className="mb-3">Jobs</h1>
+      {isLoading && (
+        <Flex justify="center" align="center" style={{ height: "70vh" }}>
+          <Spin size="large" />
+        </Flex>
+      )}
       {error && <p>{error}</p>}
 
-      <ul>
-        {data.map((job) => (
-          <JobCard
-            key={job.id}
-            onClick={() => handleJobSelect(job.id)} // Pass only the job ID to navigate
-            title={job.name}
-            company={job.company?.name || "No company listed"}
-            location={
-              job.locations?.map((location) => location.name).join(", ") ||
-              "No location"
-            }
-            description={job.contents || "No description available"}
-            publicationDate={job.publication_date || "No date available"}
-            levels={
-              job.levels?.map((level) => level.name).join(", ") || "No levels"
-            }
-          />
-        ))}
-      </ul>
-
-      <div className="d-flex justify-content-center mt-4 align-items-center">
-        <Pagination
-          current={page}
-          total={totalItems}
-          pageSize={20}
-          onChange={handlePageChange}
-          showSizeChanger={false}
-        />
-      </div>
-      <div className="text-center mt-3">
-        Page {page} of {totalPages}
-      </div>
+      {data && data.length > 0 && (
+        <>
+          {data.map((job) => (
+            <JobCard
+              key={job.id}
+              onClick={() => handleJobSelect(job.id)} // Pass only the job ID to navigate
+              title={job.name}
+              company={job.company?.name || "No company listed"}
+              location={
+                job.locations?.map((location) => location.name).join(", ") ||
+                "No location"
+              }
+              description={job.contents || "No description available"}
+              publicationDate={job.publication_date || "No date available"}
+              levels={
+                job.levels?.map((level) => level.name).join(", ") || "No levels"
+              }
+            />
+          ))}
+          <div className="d-flex justify-content-center mt-4 align-items-center">
+            <Pagination
+              current={page}
+              total={totalItems}
+              pageSize={20}
+              onChange={handlePageChange}
+              showSizeChanger={false}
+            />
+          </div>
+          <div className="text-center mt-3">
+            Page {page} of {totalPages}
+          </div>
+        </>
+      )}
     </div>
   );
 }

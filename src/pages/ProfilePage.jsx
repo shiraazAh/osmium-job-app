@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 
 export default function ProfilePage() {
-    
   const { name, email, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -27,7 +26,7 @@ export default function ProfilePage() {
         />
       ),
       onClick: () => {
-        // navigate("/edit-profile");
+        navigate("/edit");
       },
     },
     {
@@ -54,8 +53,8 @@ export default function ProfilePage() {
       ),
       onClick: () => {
         signOut().then(() => {
-            navigate("/");
-            logout();
+          navigate("/");
+          logout();
         });
       },
     },
