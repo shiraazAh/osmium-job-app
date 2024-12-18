@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { imageUrls } from "./JobCard";
 
 /* Contributers:  */
-
+/*This is a variable to limit the length strings on the card (used for job title and location) */
 const shortenText = (text, maxlength) => {
   if (text.length <= maxlength) {
     return text;
@@ -61,6 +61,7 @@ const MyApplicationCard = ({
           />
           <div>
             <p className="company-name">{company}</p>
+            {/*this is the limiter varible for job title*/}
             <h5 className="job-title">{shortenText(title, 70)}</h5>
           </div>
         </div>

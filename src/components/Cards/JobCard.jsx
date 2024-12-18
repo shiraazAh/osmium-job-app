@@ -27,7 +27,13 @@ export const imageUrls = [
   "https://cdn.pixabay.com/photo/2019/11/03/16/27/beer-tasting-flight-4599048_1280.jpg",
 ];
 
-/* helper function to shorten title and location*/
+/**This is to get a random salary on the job card as the API doesnt specifically have a salary */
+function RandomSalary(){
+  let salary = Math.floor((Math.random()*10)+1);
+  return salary;
+};
+
+/* to shorten title and location*/
 const shortenText = (text, maxlength) => {
   if (text.length <= maxlength) {
     return text;
@@ -40,7 +46,6 @@ const JobCard = ({
   title,
   company,
   location,
-  salary /** Still working on the salary **/,
 }) => {
   const [randomImageUrl, setRandomImageUrl] = useState("");
 
@@ -56,7 +61,7 @@ const JobCard = ({
       bodyStyle={{ padding: "15px" }}
       onClick={onClick}
     >
-      {/* Top Section */}
+      {/* This is the top left section to my card*/}
       {/*random image used for img src*/}
       <div className="job-card-top">
         <div className="job-card-left">
@@ -67,19 +72,21 @@ const JobCard = ({
           />
           <div>
             <p className="company-name">{company}</p>
-            <h5 className="job-title">{shortenText(title, 70)}</h5>
+            {/*this is the limiter varible for job title*/}
+            <h5  className="job-title">{shortenText(title, 70)}</h5>
           </div>
-        </div>
-        <Button type="text" icon={<HeartOutlined />} className="save-button" />
+        </div >
+        {/** this is a button as a heart icon from antd icons used to like jobs you find interesting*/}
+        <Button type="text" icon={<HeartOutlined />}  className="save-button" /> 
       </div>
-
-      {/* Bottom Section */}
+      {/* this is the Bottom Section including the location and the salary*/}
       <div className="job-card-bottom">
         <div className="job-location">
           <EnvironmentOutlined className="location-icon" />
+           {/*this is the limiter varible for job location*/}
           <p className="location-text">{shortenText(location, 35)}</p>
         </div>
-        <h3 className="job-salary">$K/mo</h3>
+        <h3 className="job-salary">${RandomSalary()}K/mo</h3>
       </div>
     </Card>
   );
