@@ -1,22 +1,28 @@
-import {Card, Flex, Tag} from "antd";
-import React from "react";
-
+import { Card, Flex, Tag } from "antd";
+import React, { useEffect, useState } from "react";
+import { imageUrls } from "./JobCard";
 
 const shortenText = (text, maxlength) => {
-    if(text.length <= maxlength){
-        return text;
-    }
-    return text.slice(text, maxlength) + "...";
+  if (text.length <= maxlength) {
+    return text;
+  }
+  return text.slice(text, maxlength) + "...";
 };
 
 const MyApplicationCard = ({
-    onClick,
-    title,
-    company,
-    applicationDate = "NA",
-    Status,
+  onClick,
+  title,
+  company,
+  applicationDate = "NA",
+  Status,
 }) => {
+  const [randomImageUrl, setRandomImageUrl] = useState("");
 
+  useEffect(() => {
+    // Select a random image URL when the component mounts
+    const randomIndex = Math.floor(Math.random() * imageUrls.length);
+    setRandomImageUrl(imageUrls[randomIndex]);
+  }, []);
   // Format the date
   const options = {
     year: "numeric",
@@ -28,9 +34,7 @@ const MyApplicationCard = ({
   };
 
   const date = new Date(applicationDate);
-  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
-    date
-  );
+  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
 
   // Adjust format to match 02-10-2024 6:30 pm
   const [month, day, year] = formattedDate.split(",")[0].split("/");
@@ -48,7 +52,7 @@ const MyApplicationCard = ({
       <div className="job-card-top">
         <div className="job-card-left">
           <img
-            src="https://via.placeholder.com/60"
+            src={randomImageUrl}
             alt="Company Logo"
             className="company-logo"
           />
@@ -58,7 +62,7 @@ const MyApplicationCard = ({
           </div>
         </div>
         <Tag className="Status" color="gold">
-          {(Status == 0 ? "Viewing" : Status == 1 ? "Accepted" : "Rejected")}
+          {Status == 0 ? "Viewing" : Status == 1 ? "Accepted" : "Rejected"}
         </Tag>
       </div>
 
@@ -71,5 +75,5 @@ const MyApplicationCard = ({
     </Card>
   );
 };
-    
-    export default MyApplicationCard;
+
+export default MyApplicationCard;
