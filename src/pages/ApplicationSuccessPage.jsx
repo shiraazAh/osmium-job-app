@@ -12,12 +12,17 @@ import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 
+/* Contributers: Oliver,  */
+/* ApplicationSuccessPage is where the user is brought after clicking the apply button on a job, it tells them they
+  have successfully applied and allows them to view more jobs or view all their applications*/
+
 export default function ApplicationSuccessPage() {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
 
   useEffect(() => {
+    // job id is fetched from API so user applies to the correct job
     const fetchJobDetails = async () => {
       try {
         const response = await fetch(
@@ -40,16 +45,19 @@ export default function ApplicationSuccessPage() {
     return <div>Loading job details...</div>;
   }
 
+  // Navigate to the job detail page
   const handleGoBack = () => {
-    navigate(`/job/${jobId}`); // Navigate to the success page
+    navigate(`/job/${jobId}`);
   };
 
+  // Navigate to the MyApplicationsPages
   const handleViewMyApplications = () => {
-    navigate("/my-applications"); // Navigate to the jobs pages
+    navigate("/my-applications");
   };
 
+  // Navigate to the jobs pages
   const handleFindMoreJobs = () => {
-    navigate("/jobs"); // Navigate to the jobs pages
+    navigate("/jobs");
   };
 
   return (
@@ -58,14 +66,9 @@ export default function ApplicationSuccessPage() {
         <div className="d-flex justify-content-between">
           <Button
             type="text"
-            icon={<LeftOutlined />} // Changed icon
+            icon={<LeftOutlined />}
             onClick={handleGoBack}
-            className="mb-4 pl-0 icon-button" // Removed left padding
-          ></Button>
-          <Button
-            type="text"
-            icon={<EllipsisOutlined />} // Changed icon
-            className="mb-4 pl-0 icon-button-ellipsis" // Removed left padding
+            className="mb-4 pl-0 icon-button"
           ></Button>
         </div>
         <div className="text-center">

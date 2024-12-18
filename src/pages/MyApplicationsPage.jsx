@@ -4,6 +4,8 @@ import { AuthContext } from "react-oidc-context";
 import { useNavigate } from "react-router-dom";
 import MyApplicationCard from "../components/Cards/MyApplicationCard";
 
+/* Contributers:  */
+
 export default function MyApplicationsPage() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);

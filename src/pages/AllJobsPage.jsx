@@ -7,15 +7,18 @@ import GradientButton from "../components/Buttons/GradientButton";
 import CustomNavbar from "../components/Navbar";
 import React, { useState, useEffect } from "react";
 import JobCard from "../components/Cards/JobCard";
-import { useNavigate } from "react-router-dom"; // Ensure this import is added
+import { useNavigate } from "react-router-dom";
 import "../styles.css";
 import jobData from "../utils/jobData.json";
 import { getParameters } from "../utils/helpers";
 
+/* Contributers: Shiraaz, Oliver,  */
+/* AllJobsPage allows user to search for jobs based on category, location and level and it also shows user 10 reccomeneded jobs  */
+
 const { Search } = Input;
 
 export default function AllJobsPage() {
-  const navigate = useNavigate(); // Use useNavigate here
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -51,13 +54,15 @@ export default function AllJobsPage() {
     fetchPage(page);
   }, [page]);
 
-  const handleSearch = async() => {
-      navigate(`/jobs?${getParameters(jobCategory, jobLocation, jobLevel)}`);
+  // search for jobs based on category, location and/or level
+  const handleSearch = async () => {
+    navigate(`/jobs?${getParameters(jobCategory, jobLocation, jobLevel)}`);
   };
 
-  const handlePageChange = (pageNumber) => {
-    setPage(pageNumber);
-  };  
+  // function not used
+  // const handlePageChange = (pageNumber) => {
+  //   setPage(pageNumber);
+  // };
 
   const handleJobSelect = (jobId) => {
     // Navigate to the job details page using the job ID
@@ -115,20 +120,17 @@ export default function AllJobsPage() {
             height={50}
             onClick={() => handleSearch()}
             loading={buttonLoading}
-            disabled={(!jobCategory && !jobLocation && !jobLevel)}
+            disabled={!jobCategory && !jobLocation && !jobLevel}
           >
             Search Job
           </GradientButton>
         </Card>
       </div>
+      {/* List of 10 reccomended jobs, same as JobCard used in the JobPagination component */}
       <div className="mt-4 mb-5">
         <div className="d-flex flex-row justify-content-between align-items-center mb-2">
           <p className="font-weight-bold mb-0">Recomendations</p>
-          <Button
-            onClick={handleSeeAllClick}
-            type="link"
-            className=" p-0"
-          >
+          <Button onClick={handleSeeAllClick} type="link" className=" p-0">
             See All
           </Button>
         </div>
@@ -148,7 +150,6 @@ export default function AllJobsPage() {
             levels={
               job.levels?.map((level) => level.name).join(", ") || "No levels"
             }
-
           />
         ))}
       </div>

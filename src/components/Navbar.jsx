@@ -7,6 +7,8 @@ import { BackgroundNav, WavingHand } from "../assets";
 import { useContext, useState } from "react";
 import { AuthContext } from "react-oidc-context";
 
+/* Contributers:  */
+
 export default function CustomNavbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { name } = useContext(AuthContext);

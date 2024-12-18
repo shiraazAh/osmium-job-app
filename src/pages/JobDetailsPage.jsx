@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Segmented, Button, message, Flex, Spin } from "antd";
-import {
-  LeftOutlined,
-  EllipsisOutlined,
-  EnvironmentOutlined,
-} from "@ant-design/icons";
-import detailImage from "../assets/job-detail-image.png";
+import { LeftOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
 import { AuthContext } from "react-oidc-context";
+import { imageUrls } from "../components/Cards/JobCard";
+
+/* Contributers: Oliver,  */
+/*  JobDetailsPage more important and deatiled information about a specfic job takedn ftom the Muse API,
+  here user and switch between the job description and the company information. The user can also click apply to a job*/
 
 export default function JobDetailsPage() {
   const navigate = useNavigate();
@@ -18,12 +18,13 @@ export default function JobDetailsPage() {
   const [selected, setSelected] = useState("Description");
   const [isApplying, setIsApplying] = useState(false);
   const { sub: userId } = useContext(AuthContext);
+  const [randomImageUrl, setRandomImageUrl] = useState(""); // set random image
 
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
         const response = await fetch(
-          `https://www.themuse.com/api/public/jobs/${jobId}`
+          `https://www.themuse.com/api/public/jobs/${jobId}` // API called to jobId
         );
         if (!response.ok) {
           throw new Error("Failed to fetch job details");
@@ -36,6 +37,8 @@ export default function JobDetailsPage() {
     };
 
     fetchJobDetails();
+    const randomIndex = Math.floor(Math.random() * imageUrls.length);
+    setRandomImageUrl(imageUrls[randomIndex]);
   }, [jobId]); // Fetch job details when jobId changes
 
   if (!jobDetails) {
@@ -46,12 +49,13 @@ export default function JobDetailsPage() {
     );
   }
 
+  // go back to previous page
   const handleGoBack = () => {
-   window.history.back(); // Go back to the jobs page
+    window.history.back();
   };
 
+  // PUTS userId, jobId and job details to the database, which stores users data about job applications
   const handleSubmitApplication = async () => {
-
     setIsApplying(true);
 
     try {
@@ -92,20 +96,16 @@ export default function JobDetailsPage() {
         <div class="d-flex justify-content-between">
           <Button
             type="text"
-            icon={<LeftOutlined />} // Changed icon
+            icon={<LeftOutlined />}
             onClick={handleGoBack}
-            className="mb-4 pl-0 icon-button" // Removed left padding
-          ></Button>
-          <Button
-            type="text"
-            icon={<EllipsisOutlined />} // Changed icon
-            className="mb-4 pl-0 icon-button-ellipsis" // Removed left padding
+            className="mb-4 pl-0 icon-button"
           ></Button>
         </div>
         <div className="text-center">
           <img
-            src={detailImage}
-            className="w-full h-full object-cover absolute top-0 left-0 text-center"
+            src={randomImageUrl}
+            alt="Company Logo"
+            className="detail-image"
           />
         </div>
 
@@ -136,7 +136,8 @@ export default function JobDetailsPage() {
         >
           {isApplying ? "Applying..." : "Apply"}
         </GradientButton>
-
+        {/* User can switch between the jon description and company information, the API didn't have
+        specific or seperate api endpoint company informmation and so its int the description*/}
         <Segmented
           options={["Description", "Company"]}
           onChange={(option) => setSelected(option)}
@@ -144,6 +145,7 @@ export default function JobDetailsPage() {
         />
 
         <div className="information p-3">
+          {/* Job description segment, filled with data from the Muse API*/}
           {selected === "Description" && (
             <div
               className="prose max-w-none detail-bullets-list-styling"
@@ -152,6 +154,7 @@ export default function JobDetailsPage() {
               }}
             />
           )}
+          {/* Comapany segment */}
           {selected === "Company" && (
             <div>
               <h4 className="text-xl font-semibold mb-4">About Company</h4>
@@ -166,4 +169,3 @@ export default function JobDetailsPage() {
     </div>
   );
 }
-;

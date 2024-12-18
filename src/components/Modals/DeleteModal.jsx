@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 
+/* Contributers: Oliver,  */
+/* Modal component, not used */
+
 export default function ConfirmModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {

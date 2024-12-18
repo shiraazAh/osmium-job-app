@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   BriefcaseIconOutlined,
   BriefcaseIconFilled,
@@ -7,12 +7,13 @@ import {
   HomeIconFilled,
   HomeIconOutlined,
   ApplicationsIconFilled,
-  ApplicationsIconOutlined
+  ApplicationsIconOutlined,
 } from "../../assets/bottombar";
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from "react-router-dom";
+
+/* Contributers:  */
 
 export default function BottomBar() {
-
   const { pathname } = useLocation();
 
   return (
@@ -39,9 +40,7 @@ export default function BottomBar() {
       <NavLink to="/jobs" className="border-0 bg-transparent">
         <img
           src={
-            pathname === "/jobs"
-              ? BriefcaseIconFilled
-              : BriefcaseIconOutlined
+            pathname === "/jobs" ? BriefcaseIconFilled : BriefcaseIconOutlined
           }
           alt="briefcase icon"
         />
