@@ -6,10 +6,10 @@ import {
   EllipsisOutlined,
   EnvironmentOutlined,
 } from "@ant-design/icons";
-import detailImage from "../assets/job-detail-image.png";
 import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
 import { AuthContext } from "react-oidc-context";
+import { imageUrls } from "../components/Cards/JobCard";
 
 export default function JobDetailsPage() {
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ export default function JobDetailsPage() {
   const [selected, setSelected] = useState("Description");
   const [isApplying, setIsApplying] = useState(false);
   const { sub: userId } = useContext(AuthContext);
+  const [randomImageUrl, setRandomImageUrl] = useState("");
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -36,6 +37,8 @@ export default function JobDetailsPage() {
     };
 
     fetchJobDetails();
+    const randomIndex = Math.floor(Math.random() * imageUrls.length);
+    setRandomImageUrl(imageUrls[randomIndex]);
   }, [jobId]); // Fetch job details when jobId changes
 
   if (!jobDetails) {
@@ -47,11 +50,10 @@ export default function JobDetailsPage() {
   }
 
   const handleGoBack = () => {
-   window.history.back(); // Go back to the jobs page
+    window.history.back(); // Go back to the jobs page
   };
 
   const handleSubmitApplication = async () => {
-
     setIsApplying(true);
 
     try {
@@ -104,8 +106,9 @@ export default function JobDetailsPage() {
         </div>
         <div className="text-center">
           <img
-            src={detailImage}
-            className="w-full h-full object-cover absolute top-0 left-0 text-center"
+            src={randomImageUrl}
+            alt="Company Logo"
+            className="detail-image"
           />
         </div>
 
@@ -166,4 +169,3 @@ export default function JobDetailsPage() {
     </div>
   );
 }
-;
