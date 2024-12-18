@@ -11,6 +11,8 @@ import { AuthContext } from "react-oidc-context";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 
+/* Contributers:  */
+
 export default function ProfilePage() {
   const { name, email, logout } = useContext(AuthContext);
   const navigate = useNavigate();

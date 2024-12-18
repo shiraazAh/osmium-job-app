@@ -3,6 +3,9 @@ import { Card, Button } from "antd";
 import { EnvironmentOutlined, HeartOutlined } from "@ant-design/icons";
 import "../../styles.css";
 
+/* Contributers: Oliver */
+// Random image function made with the help of the LLM Claude.Ai
+// images used on jobs cards
 export const imageUrls = [
   "https://cdn.pixabay.com/photo/2012/07/26/20/55/barrels-52934_1280.jpg",
   "https://cdn.pixabay.com/photo/2017/06/24/23/41/beer-2439237_1280.jpg",
@@ -42,7 +45,7 @@ const JobCard = ({
   const [randomImageUrl, setRandomImageUrl] = useState("");
 
   useEffect(() => {
-    // Select a random image URL when the component mounts
+    // Select a random image from the imageUrls array
     const randomIndex = Math.floor(Math.random() * imageUrls.length);
     setRandomImageUrl(imageUrls[randomIndex]);
   }, []);
@@ -54,6 +57,7 @@ const JobCard = ({
       onClick={onClick}
     >
       {/* Top Section */}
+      {/*random image used for img src*/}
       <div className="job-card-top">
         <div className="job-card-left">
           <img

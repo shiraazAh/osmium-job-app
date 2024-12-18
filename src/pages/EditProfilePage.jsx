@@ -1,26 +1,25 @@
-import React, { useContext, useState } from "react"; // Import React hooks for state and context.
-import { Layout, message } from "antd";  // Ant Design layout and message components for UI and feedback
-import GradientButton from "../components/Buttons/GradientButton"; // Reusable gradient button component
+import React, { useContext, useState } from "react"; 
+import { Layout, message } from "antd"; 
+import GradientButton from "../components/Buttons/GradientButton";
 import Ellipse from "../assets/background/Ellipse.png"; // Background ellipse image
-import { Card } from "antd"; // Ant Design card for grouping content
-import { Button } from "antd"; // Ant Design button component
+import { Card } from "antd"; 
+import { Button } from "antd"; 
 import { EnvironmentOutlined, MailOutlined } from "@ant-design/icons"; // Ant Design icons for location and mail
-import SecondaryButton from "../components/Buttons/SecondaryButton"; // Resuable secondary button component
+import SecondaryButton from "../components/Buttons/SecondaryButton";
 import { AuthContext } from "react-oidc-context"; // Context to access authentication-related data.
 import { updateUserAttribute } from "aws-amplify/auth"; // AWS Amplify function to update user attributes
-import { useNavigate } from "react-router-dom"; // Hook for navigation in React Router
+import { useNavigate } from "react-router-dom"; 
 
+/* Contributers:  */
 
-export default function EditProfilePage()
-
-{
+export default function EditProfilePage() {
     const { name, email, getUserDetails } = useContext(AuthContext);// Extract user details and related methods from context
     const [fullname, setFullName] = useState(name); // Local state to track name input
     const [loading, setLoading] = useState(false); // State for managing loading spinner
     const navigate = useNavigate(); // Navigation function to redirect users.
 
      // Handles updating a user attribute via AWS Amplify.
-    async function handleUpdateUserAttribute(attributeKey, value) {
+  async function handleUpdateUserAttribute(attributeKey, value) {
     setLoading(true);
     try {
       const output = await updateUserAttribute({
@@ -30,20 +29,19 @@ export default function EditProfilePage()
         },
       });
       handleUpdateUserAttributeNextSteps(output);
-      
     } catch (error) {
       message.error(error);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-}
+  }
 
 // Handles the next steps after updating the user attribute.
 function handleUpdateUserAttributeNextSteps(output) {
   const { nextStep } = output;
 
-  switch (nextStep.updateAttributeStep) {
-    case "DONE":
+    switch (nextStep.updateAttributeStep) {
+      case "DONE":
         message.success("Your name was successfully updated.");
         getUserDetails();
         navigate("/profile"); // Navigate to the profile page.
@@ -51,27 +49,23 @@ function handleUpdateUserAttributeNextSteps(output) {
     default:
       message.error("Some error occurred, please try again later.");
   }
-}
-    return (
-      <>
-        <Layout>
-          <div className="EditProfilePage">
-            <div className="EditPageHeading">
-              <h2 className="fw-bold mt-3 mb-3 text-center"> Edit Profile </h2>
-            </div>
-            <div className="Ellipse-Image">
-              <img
-                className="Ellipse"
-                src={Ellipse}
-                alt="Wait a moment please"
-              />
-            </div>
+  return (
+    <>
+      <Layout>
+        <div className="EditProfilePage">
+          <div className="EditPageHeading">
+            <h2 className="fw-bold mt-3 mb-3 text-center"> Edit Profile </h2>
+          </div>
+          <div className="Ellipse-Image">
+            <img className="Ellipse" src={Ellipse} alt="Wait a moment please" />
+          </div>
 
             <Card className="edit-card p-2"> {/* Card for profile editing form */}
               <div className="edit-card-inside">
                 <div className="EditName">
                   <p>Full Name</p>
                   <input
+                    className="pt-0 pb-0"
                     type="text"
                     placeholder="Enter your name"
                     className="pb-1 pt-0"
@@ -121,8 +115,33 @@ function handleUpdateUserAttributeNextSteps(output) {
                 <b>Cancel</b>
               </SecondaryButton>
             </div>
+          </Card>
+
+          <div className="Edit-Button-group">
+            <GradientButton
+              size="small"
+              type="primary"
+              className="SaveButton"
+              height={50}
+              disabled={name === fullname}
+              loading={loading}
+              onClick={() => handleUpdateUserAttribute("name", fullname)}
+            >
+              Save
+            </GradientButton>
+            <SecondaryButton
+              size="small"
+              ghost
+              type="primary"
+              className="CancelButton"
+              height={50}
+              onClick={() => window.history.back()}
+            >
+              <b>Cancel</b>
+            </SecondaryButton>
           </div>
-        </Layout>
-      </>
-    );
+        </div>
+      </Layout>
+    </>
+  );
 }

@@ -4,6 +4,7 @@ import GradientButton from "../components/Buttons/GradientButton"; // Reusable g
 import BGImage from "../assets/background/project-image.png"; // Background image for the welcome page.
 import SecondaryButton from "../components/Buttons/SecondaryButton"; // Reusable Secondary button component.
 
+/* Contributers:  */
 export default function WelcomePage({ setAuthState }) {
   return (
     <>
@@ -57,6 +58,3 @@ export default function WelcomePage({ setAuthState }) {
     </>
   );
 }
-
-
-
