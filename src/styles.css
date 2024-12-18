@@ -304,7 +304,7 @@ h6 {
   margin-bottom: 5px;
 }
 
-/***** Job Detail Page Segemeneted styling *****/
+/***** Job Detail Page Segemeneted styling, Claude.AI used to find name of the specfic Antd items to style e.g .ant-segmented-item-selected *****/
 .custom-segmented {
   margin: 20px 0;
   border-radius: 8px;
@@ -328,17 +328,13 @@ h6 {
   background-color: #e3e3e347;
 }
 
-.icon-button-ellipsis {
-  transform: rotate(90deg);
-}
-
 .information {
   background-color: #fbfbfc;
   border-radius: 8px;
   /* min-width: 327px; */
 }
 
-/***** Job Detail Page Bullet points styling *****/
+/***** Job Detail Page Bullet points styling, Styled with the help of the LLM Claude.Ai to create the custom bullet points *****/
 
 .detail-apply-button {
   font-weight: 700;

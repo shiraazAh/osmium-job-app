@@ -4,6 +4,7 @@ import GradientButton from "../components/Buttons/GradientButton";
 import BGImage from "../assets/background/project-image.png";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 
+/* Contributers:  */
 export default function WelcomePage({ setAuthState }) {
   return (
     <>
@@ -57,6 +58,3 @@ export default function WelcomePage({ setAuthState }) {
     </>
   );
 }
-
-
-

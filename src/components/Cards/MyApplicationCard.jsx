@@ -2,6 +2,8 @@ import { Card, Flex, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import { imageUrls } from "./JobCard";
 
+/* Contributers:  */
+
 const shortenText = (text, maxlength) => {
   if (text.length <= maxlength) {
     return text;
@@ -19,7 +21,7 @@ const MyApplicationCard = ({
   const [randomImageUrl, setRandomImageUrl] = useState("");
 
   useEffect(() => {
-    // Select a random image URL when the component mounts
+    // Selects a random to use with component
     const randomIndex = Math.floor(Math.random() * imageUrls.length);
     setRandomImageUrl(imageUrls[randomIndex]);
   }, []);
@@ -49,6 +51,7 @@ const MyApplicationCard = ({
       onClick={onClick}
     >
       {/* Top Section */}
+      {/*random image used for img src*/}
       <div className="job-card-top">
         <div className="job-card-left">
           <img
