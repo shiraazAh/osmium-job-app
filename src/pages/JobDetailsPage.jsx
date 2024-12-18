@@ -11,7 +11,7 @@ import { imageUrls } from "../components/Cards/JobCard";
 /*  JobDetailsPage more important and deatiled information about a specfic job takedn ftom the Muse API,
   here user and switch between the job description and the company information. The user can also click apply to a job*/
 
-export default function JobDetailsPage() {
+export default function JobDetailsPage({applications, fetchAppliedJobs}) {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
@@ -19,6 +19,8 @@ export default function JobDetailsPage() {
   const [isApplying, setIsApplying] = useState(false);
   const { sub: userId } = useContext(AuthContext);
   const [randomImageUrl, setRandomImageUrl] = useState(""); // set random image
+
+  const jobHasBeenAppliedTo = applications.some((application) => application.jobId === jobId);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -59,19 +61,22 @@ export default function JobDetailsPage() {
     setIsApplying(true);
 
     try {
-      const response = await fetch("/application", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          jobId: jobId,
-          jobName: jobDetails.name,
-          company: jobDetails.company?.name,
-          status: Math.floor(Math.random() * 3),
-        }),
-      });
+      const response = await fetch(
+        "https://jcxe983h1e.execute-api.eu-west-1.amazonaws.com/application",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            jobId: jobId,
+            jobName: jobDetails.name,
+            company: jobDetails.company?.name,
+            status: Math.floor(Math.random() * 3),
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorBody = await response.text();
@@ -79,6 +84,7 @@ export default function JobDetailsPage() {
       }
 
       // Navigate to success page
+      fetchAppliedJobs();
       navigate(`/job/${jobId}/success`);
     } catch (error) {
       console.error("Application submission error:", error);
@@ -89,6 +95,16 @@ export default function JobDetailsPage() {
       setIsApplying(false);
     }
   };
+
+  const jobButtonText = () => {
+    if (jobHasBeenAppliedTo) {
+      return "Applied!";
+    } else if (isApplying) {
+      return "Applying...";
+    } else {
+      return "Apply";
+    }
+  }
 
   return (
     <div className="container mx-auto py-3">
@@ -132,9 +148,9 @@ export default function JobDetailsPage() {
           className="w-100 shadow detail-apply-button"
           height={50}
           onClick={handleSubmitApplication}
-          disabled={isApplying}
+          disabled={isApplying || jobHasBeenAppliedTo}
         >
-          {isApplying ? "Applying..." : "Apply"}
+          {jobButtonText()}
         </GradientButton>
         {/* User can switch between the jon description and company information, the API didn't have
         specific or seperate api endpoint company informmation and so its int the description*/}

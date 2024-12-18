@@ -1,9 +1,9 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Layout, Spin } from "antd";
+import { Layout, message, Spin } from "antd";
 import AllJobsPage from "../pages/AllJobsPage";
 import ComponentsPage from "../pages/ComponentsPage";
 import BottomBar from "../components/Containers/BottomBar";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "react-oidc-context";
 import ProfilePage from "../pages/ProfilePage";
 import JobPagination from "../components/JobPagination";
@@ -13,8 +13,29 @@ import EditProfilePage from "../pages/EditProfilePage";
 import MyApplicationsPage from "../pages/MyApplicationsPage";
 
 export default function AuthenticatedRoutes() {
-  const { name: userName } = useContext(AuthContext);
+  const { name: userName, sub: userId } = useContext(AuthContext);
   const { pathname } = useLocation();
+  const [applications, setApplications] = useState([]);
+  const [apiLoading, setapiLoading] = useState(false);
+  const fetchAppliedJobs = async () => {
+    setapiLoading(true);
+    try {
+      const res = await fetch(
+        `https://jcxe983h1e.execute-api.eu-west-1.amazonaws.com/application/${userId}`
+      );
+      const data = await res.json();
+      setApplications(data.Items);
+    } catch (error) {
+      message.error("Failed to fetch applications");
+    } finally {
+      setapiLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if(!userId) return; // If the user is not logged in, don't fetch applications
+    fetchAppliedJobs();
+  }, [userId]);
 
   return (
     <>
@@ -34,9 +55,26 @@ export default function AuthenticatedRoutes() {
               <Route path="/" element={<AllJobsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/components" element={<ComponentsPage />} />
-              <Route path="/my-applications" element={<MyApplicationsPage />} />
+              <Route
+                path="/my-applications"
+                element={
+                  <MyApplicationsPage
+                    applications={applications}
+                    fetchAppliedJobs={fetchAppliedJobs}
+                    apiLoading={apiLoading}
+                  />
+                }
+              />
               <Route path="/jobs" element={<JobPagination />} />
-              <Route path="/job/:jobId" element={<JobDetailsPage />} />
+              <Route
+                path="/job/:jobId"
+                element={
+                  <JobDetailsPage
+                    applications={applications}
+                    fetchAppliedJobs={fetchAppliedJobs}
+                  />
+                }
+              />
               <Route
                 path="/job/:jobId/success"
                 element={<ApplicationSuccessPage />}
