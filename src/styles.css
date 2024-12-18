@@ -80,13 +80,16 @@ h6 {
   border-radius: 8px;
   overflow: hidden;
 }
+
 /***** WelcomePage *****/
 
+/* Main container for the Welcome Page */
 .WelcomePage {
   text-align: center;
   font-family: Roboto;
 }
 
+/* Responsive image styling */
 .img-fluid {
   width: 336px;
   height: 336px;
@@ -96,12 +99,14 @@ h6 {
   height: auto;
 }
 
+/* Styling for the description section */
 .description {
   align-items: center;
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Shared styling for buttons on the Welcome Page */
 .button1,
 .button2 {
   text-align: center;
@@ -119,7 +124,8 @@ h6 {
   display: block;
 }
 
-/* Container styles  JOB CARDS */
+/***** Container styles  JOB CARDS *****/
+
 .job-card {
   width: 100%;
   display: flex;
@@ -201,7 +207,6 @@ h6 {
   font-size: small;
   margin-left: 5px;
 }
-/** THIS IS THE END OF THE JOB CARDS ***/
 
 .company-logo {
   width: 45px;
@@ -417,6 +422,7 @@ h6 {
 
 /***** Edit Profile Page*****/
 
+/* Main container styling for the Edit Profile Page */
 .EditprofilePage {
   display: flex;
   flex-direction: column;
@@ -435,6 +441,7 @@ h6 {
   margin: 0 auto;
 }
 
+/* Styling the Ellipse */
 .Ellipse {
   width: 124px;
   height: 124px;
@@ -459,14 +466,17 @@ h6 {
   background: #ffffff;
 }
 
-.edit-cad-inside {
+/* Inner layout of the edit card */
+.edit-cad-inside
+{
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.EditName,
-.EditLocation {
+/* Styling for name and location input containers */
+.EditName, .EditLocation
+{
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -486,6 +496,7 @@ h6 {
   gap: 10px;
 }
 
+/* Styling for input fields */
 input {
   width: 100%;
   padding: 8px 0;
@@ -495,12 +506,15 @@ input {
   border: none;
 }
 
+/*Styling the Divider line for separating sections */
 .divider {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: 3px;
   margin-bottom: 7px;
 }
 
+
+/* Grouping and alignment of save and cancel buttons */
 .Edit-Button-group {
   display: flex;
   justify-content: space-between;
@@ -512,11 +526,11 @@ input {
   margin-right: auto;
 }
 
-.SaveButton,
-.CancelButton {
-  flex-grow: 1;
-  height: 50px;
-  box-shadow: 0px 11px 11px 0px #3081d021;
+/* Styling for Save and Cancel buttons */
+.SaveButton, .CancelButton {
+  flex-grow: 1; 
+  height: 50px; 
+  box-shadow: 0px 11px 11px 0px #3081D021; 
   border-width: 2px;
   margin: 0;
 }
