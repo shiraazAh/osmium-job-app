@@ -65,7 +65,7 @@ const MyApplicationCard = ({
             <h5 className="job-title">{shortenText(title, 70)}</h5>
           </div>
         </div>
-        <Tag className="Status" color="gold">
+        <Tag className="Status" color={Status == 0 ? "gold" : Status == 1 ? "green" : "red"}>
           {Status == 0 ? "Viewing" : Status == 1 ? "Accepted" : "Rejected"}
         </Tag>
       </div>
