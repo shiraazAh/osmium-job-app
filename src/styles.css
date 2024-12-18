@@ -21,7 +21,7 @@ h6 {
 .navbar-container {
   height: 50px;
   /* margin-top: 25px; */
-} 
+}
 
 .navbar-bg-extend {
   width: 100vw !important;
@@ -55,7 +55,12 @@ h6 {
   color: white;
 }
 
-.ant-select-focused:where(.css-dev-only-do-not-override-1dfwb79).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+.ant-select-focused:where(
+    .css-dev-only-do-not-override-1dfwb79
+  ).ant-select-outlined:not(.ant-select-disabled):not(
+    .ant-select-customize-input
+  ):not(.ant-pagination-size-changer)
+  .ant-select-selector {
   box-shadow: none !important;
 }
 
@@ -290,6 +295,15 @@ h6 {
   border-color: #3081d0 !important;
 }
 
+/***** Job Detail Page Image styling *****/
+.detail-image {
+  width: 120px;
+  height: 120px;
+  margin-right: 10px;
+  border-radius: 20%;
+  margin-bottom: 5px;
+}
+
 /***** Job Detail Page Segemeneted styling *****/
 .custom-segmented {
   margin: 20px 0;
@@ -400,7 +414,6 @@ h6 {
   font-weight: 700;
   margin: 10px 0;
 }
- 
 
 /***** Edit Profile Page*****/
 
@@ -408,13 +421,11 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-  height: 100vh; 
-  padding: 20px; 
-  gap: 20px; 
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  gap: 20px;
 }
-
-
 
 /* Center Ellipse */
 .Ellipse-Image {
@@ -422,7 +433,6 @@ h6 {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  
 }
 
 .Ellipse {
@@ -432,7 +442,7 @@ h6 {
   border-radius: 50%;
   overflow: hidden;
   object-fit: cover;
-  display: block; 
+  display: block;
   margin: 0 auto;
 }
 
@@ -443,29 +453,27 @@ h6 {
   padding: 20px 28px;
   gap: 24px;
   border-radius: 8px;
-  box-shadow: 0px 1px 2px 0px #9393931A;
-  max-width: 400px; 
+  box-shadow: 0px 1px 2px 0px #9393931a;
+  max-width: 400px;
   margin: 25px auto 30px auto;
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
-.edit-cad-inside
-{
+.edit-cad-inside {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  
 }
 
-.EditName, .EditLocation
-{
+.EditName,
+.EditLocation {
   display: flex;
   flex-direction: column;
   gap: 10px;
-   
 }
 
-.EditName p, .EditLocation p {
+.EditName p,
+.EditLocation p {
   font-weight: bold;
   font-size: 16px;
   letter-spacing: 1%;
@@ -474,8 +482,8 @@ h6 {
 
 .location-container {
   display: flex;
-  align-items: center; 
-  gap: 10px
+  align-items: center;
+  gap: 10px;
 }
 
 input {
@@ -483,35 +491,32 @@ input {
   padding: 8px 0;
   outline: none;
   font-size: 14px;
-  background: transparent; 
-  border: none; 
+  background: transparent;
+  border: none;
 }
-
 
 .divider {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: 3px;
-  margin-bottom: 7px; 
+  margin-bottom: 7px;
 }
-
-
 
 .Edit-Button-group {
   display: flex;
   justify-content: space-between;
-  gap: 10px; 
-  margin-top: auto; 
+  gap: 10px;
+  margin-top: auto;
   width: 100%;
-  max-width: 400px; 
-  margin-left: auto; 
-  margin-right: auto; 
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.SaveButton, .CancelButton {
-  flex-grow: 1; 
-  height: 50px; 
-  box-shadow: 0px 11px 11px 0px #3081D021; 
+.SaveButton,
+.CancelButton {
+  flex-grow: 1;
+  height: 50px;
+  box-shadow: 0px 11px 11px 0px #3081d021;
   border-width: 2px;
   margin: 0;
 }
-
