@@ -6,32 +6,14 @@ import MyApplicationCard from "../components/Cards/MyApplicationCard";
 
 /* Contributers:  */
 
-export default function MyApplicationsPage() {
-  const [applications, setApplications] = useState([]);
-  const [loading, setLoading] = useState(false);
+export default function MyApplicationsPage({ applications, apiLoading, fetchAppliedJobs }) {
   const navigate = useNavigate();
-  const { sub: userId } = useContext(AuthContext);
-  const fetchApi = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/application/${userId}`);
-
-      const data = await res.json();
-      setApplications(data.Items);
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchApi();
-  }, []);
+  
 
   return (
     <div className="pt-4">
       <h2 className="fw-bold mb-3">My Applications</h2>
-      {loading ? (
+      {apiLoading ? (
         <Flex justify="center" align="center" style={{ height: "70vh" }}>
           <Spin size="large" />
         </Flex>
