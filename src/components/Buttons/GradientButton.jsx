@@ -3,6 +3,9 @@ import { Button, ConfigProvider, Space } from "antd";
 import { createStyles } from "antd-style";
 import "../../styles.css";
 
+/* Contributers: Somesh */
+// Code taken from: https://ant.design/components/button (Gradient Button) and made small adjustments
+
 const useStyle = createStyles(({ prefixCls, css }) => ({
   linearGradientButton: css`
     &.${prefixCls}-btn-primary:not([disabled]):not(

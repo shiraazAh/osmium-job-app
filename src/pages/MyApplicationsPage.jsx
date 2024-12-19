@@ -4,7 +4,7 @@ import { AuthContext } from "react-oidc-context";
 import { useNavigate } from "react-router-dom";
 import MyApplicationCard from "../components/Cards/MyApplicationCard";
 
-/* Contributers:  */
+/* Contributers: Shiraaz, Oisin  */
 
 export default function MyApplicationsPage({
   applications, // This is the list of applications that the user has applied to
@@ -28,15 +28,18 @@ export default function MyApplicationsPage({
     <div className="pt-4">
       <h2 className="fw-bold mb-3">My Applications</h2>
       {apiLoading ? (
+        // If the API call is loading, show a loading spinner
         <Flex justify="center" align="center" style={{ height: "70vh" }}>
           <Spin size="large" />
         </Flex>
       ) : applications.length === 0 ? (
+        // If the user has not applied to any jobs, show a message
         <div className="d-flex justify-content-center align-items-center mt-5">
           <Empty description="You have not applied to any jobs" />
         </div>
       ) : (
         <>
+          {/* Pending applications */}
           <Card className="mb-3">
             {" "}
             {pendingApplications.length > 0 && (
@@ -56,6 +59,7 @@ export default function MyApplicationsPage({
               </div>
             )}
           </Card>
+          {/* Accepted applications */}
           <Card className="mb-3">
             {acceptedApplications.length > 0 && (
               <div>
@@ -74,6 +78,7 @@ export default function MyApplicationsPage({
               </div>
             )}
           </Card>
+          {/* Rejected applications */}
           <Card className="mb-3">
             {rejectedApplications.length > 0 && (
               <div>

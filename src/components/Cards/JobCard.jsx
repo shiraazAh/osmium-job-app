@@ -3,7 +3,7 @@ import { Card, Button } from "antd";
 import { EnvironmentOutlined, HeartOutlined } from "@ant-design/icons";
 import "../../styles.css";
 
-/* Contributers: Oliver */
+/* Contributers: Oliver (random image generator), Oisin (Job Card) */
 // Random image function made with the help of the LLM Claude.Ai
 // images used on jobs cards
 export const imageUrls = [

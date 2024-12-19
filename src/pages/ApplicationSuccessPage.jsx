@@ -12,7 +12,7 @@ import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 
-/* Contributers: Oliver,  */
+/* Contributers: Oliver */
 /* ApplicationSuccessPage is where the user is brought after clicking the apply button on a job, it tells them they
   have successfully applied and allows them to view more jobs or view all their applications*/
 
@@ -22,7 +22,8 @@ export default function ApplicationSuccessPage() {
   const [jobDetails, setJobDetails] = useState(null);
 
   useEffect(() => {
-    // job id is fetched from API so user applies to the correct job
+    // job id is fetched from API and the job details are stored to display on page
+    // Public API documentation: https://www.themuse.com/developers/api/v2?ref=public_apis
     const fetchJobDetails = async () => {
       try {
         const response = await fetch(
@@ -64,6 +65,7 @@ export default function ApplicationSuccessPage() {
     <div className="container mx-auto py-3">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="d-flex justify-content-between">
+          {/* Back button */}
           <Button
             type="text"
             icon={<LeftOutlined />}
@@ -71,6 +73,8 @@ export default function ApplicationSuccessPage() {
             className="mb-4 pl-0 icon-button"
           ></Button>
         </div>
+
+        {/* Job details */}
         <div className="text-center">
           <img
             src={detailImage}
@@ -95,6 +99,7 @@ export default function ApplicationSuccessPage() {
             </p>
           </div>
         </div>
+        {/* Success message */}
         <div className="success-check-icon-container">
           <div className="success-check-icon-center">
             <div className="success-check-icon">
@@ -106,7 +111,8 @@ export default function ApplicationSuccessPage() {
             successfull!
           </h6>
         </div>
-
+        
+        {/* Buttons */}
         <div className="success-button-container">
           <SecondaryButton
             className="w-100 shadow success-button"
