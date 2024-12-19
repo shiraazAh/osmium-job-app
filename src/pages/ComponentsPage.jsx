@@ -1,5 +1,5 @@
 import React from "react";
-import ConfirmModal from "../components/Modal";
+import ConfirmModal from "../components/Modals/DeleteModal";
 import JobPagination from "../components/JobPagination";
 
 export default function ComponentsPage() {

@@ -12,12 +12,18 @@ import "../styles.css";
 import GradientButton from "../components/Buttons/GradientButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 
+/* Contributers: Oliver */
+/* ApplicationSuccessPage is where the user is brought after clicking the apply button on a job, it tells them they
+  have successfully applied and allows them to view more jobs or view all their applications*/
+
 export default function ApplicationSuccessPage() {
   const navigate = useNavigate();
   const { jobId } = useParams(); // Extract job ID from the URL
   const [jobDetails, setJobDetails] = useState(null);
 
   useEffect(() => {
+    // job id is fetched from API and the job details are stored to display on page
+    // Public API documentation: https://www.themuse.com/developers/api/v2?ref=public_apis
     const fetchJobDetails = async () => {
       try {
         const response = await fetch(
@@ -40,34 +46,35 @@ export default function ApplicationSuccessPage() {
     return <div>Loading job details...</div>;
   }
 
+  // Navigate to the job detail page
   const handleGoBack = () => {
-    navigate(`/job/${jobId}`); // Navigate to the success page
+    navigate(`/job/${jobId}`);
   };
 
+  // Navigate to the MyApplicationsPages
   const handleViewMyApplications = () => {
-    navigate("/my-applications"); // Navigate to the jobs pages
+    navigate("/my-applications");
   };
 
+  // Navigate to the jobs pages
   const handleFindMoreJobs = () => {
-    navigate("/jobs"); // Navigate to the jobs pages
+    navigate("/jobs");
   };
 
   return (
     <div className="container mx-auto py-3">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="d-flex justify-content-between">
+          {/* Back button */}
           <Button
             type="text"
-            icon={<LeftOutlined />} // Changed icon
+            icon={<LeftOutlined />}
             onClick={handleGoBack}
-            className="mb-4 pl-0 icon-button" // Removed left padding
-          ></Button>
-          <Button
-            type="text"
-            icon={<EllipsisOutlined />} // Changed icon
-            className="mb-4 pl-0 icon-button-ellipsis" // Removed left padding
+            className="mb-4 pl-0 icon-button"
           ></Button>
         </div>
+
+        {/* Job details */}
         <div className="text-center">
           <img
             src={detailImage}
@@ -92,6 +99,7 @@ export default function ApplicationSuccessPage() {
             </p>
           </div>
         </div>
+        {/* Success message */}
         <div className="success-check-icon-container">
           <div className="success-check-icon-center">
             <div className="success-check-icon">
@@ -103,7 +111,8 @@ export default function ApplicationSuccessPage() {
             successfull!
           </h6>
         </div>
-
+        
+        {/* Buttons */}
         <div className="success-button-container">
           <SecondaryButton
             className="w-100 shadow success-button"

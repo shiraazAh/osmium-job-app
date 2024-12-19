@@ -10,8 +10,11 @@ import { theme } from "./utils/theme.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ConfigProvider theme={theme}>
+    {/* Theme setter for ant design library  */}
+    <ConfigProvider theme={theme}> 
+      {/* Intialize Ant Design */}
       <AntdApp style={{ height: "100vh" }}>
+        {/* Initialize react router */}
           <BrowserRouter>
             <App />
           </BrowserRouter>

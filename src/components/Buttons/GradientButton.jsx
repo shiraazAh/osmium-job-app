@@ -3,6 +3,9 @@ import { Button, ConfigProvider, Space } from "antd";
 import { createStyles } from "antd-style";
 import "../../styles.css";
 
+/* Contributers: Somesh */
+// Code taken from: https://ant.design/components/button (Gradient Button) and made small adjustments
+
 const useStyle = createStyles(({ prefixCls, css }) => ({
   linearGradientButton: css`
     &.${prefixCls}-btn-primary:not([disabled]):not(
@@ -34,6 +37,7 @@ const GradientButton = ({
   children,
   className,
   height = 40,
+  style = {},
   disabled = false,
   onClick = () => {},
   loading = false,
@@ -48,7 +52,7 @@ const GradientButton = ({
       <Button
         className={`${className && className} btn-grad-disabled`}
         onClick={onClick}
-        style={{ height: height }}
+        style={{ height: height, ...style }}
         type="primary"
         size="large"
         disabled={disabled}
