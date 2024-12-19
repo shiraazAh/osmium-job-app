@@ -30,7 +30,7 @@ This is a app where user's can look and apply for new jobs. You can access the d
 - Using multiple components - have used multiple components everywhere
 - Developing your own computation / algorithms - Have used salary generator & random image generator in JobCard.jsx
 - Using a database - used dynamodb to add applied job.
-- Using React Router - Reeact router is added in App.js & AuthenticatedRoutes.jsx.
+- Using React Router - React router is added in App.js & AuthenticatedRoutes.jsx.
 
 # Project Contribution List
 
