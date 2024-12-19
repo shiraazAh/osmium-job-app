@@ -72,7 +72,6 @@ export default function EditProfilePage() {
                   className="pt-0 pb-0"
                   type="text"
                   placeholder="Enter your name"
-                  className="pb-1 pt-0"
                   value={fullname}
                   onChange={(e) => setFullName(e.target.value)} // Update state on input change
                 />

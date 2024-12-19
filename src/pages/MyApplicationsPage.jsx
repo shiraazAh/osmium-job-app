@@ -40,10 +40,9 @@ export default function MyApplicationsPage({
       ) : (
         <>
           {/* Pending applications */}
-          <Card className="mb-3">
             {" "}
             {pendingApplications.length > 0 && (
-              <div>
+              <Card className="mb-3">
                 <h6 className="fw-bold mb-3">Pending Applications</h6>
                 {pendingApplications.map((application) => (
                   <div key={application.jobId}>
@@ -56,13 +55,11 @@ export default function MyApplicationsPage({
                     />
                   </div>
                 ))}
-              </div>
+              </Card>
             )}
-          </Card>
           {/* Accepted applications */}
-          <Card className="mb-3">
             {acceptedApplications.length > 0 && (
-              <div>
+              <Card className="mb-3">
                 <h6 className="fw-bold mb-3">Accepted Applications</h6>
                 {acceptedApplications.map((application) => (
                   <div key={application.jobId}>
@@ -75,13 +72,11 @@ export default function MyApplicationsPage({
                     />
                   </div>
                 ))}
-              </div>
+              </Card>
             )}
-          </Card>
           {/* Rejected applications */}
-          <Card className="mb-3">
             {rejectedApplications.length > 0 && (
-              <div>
+              <Card className="mb-3">
                 <h6 className="fw-bold mb-3">Rejected Applications</h6>
                 {rejectedApplications.map((application) => (
                   <div key={application.jobId}>
@@ -94,9 +89,8 @@ export default function MyApplicationsPage({
                     />
                   </div>
                 ))}
-              </div>
+              </Card>
             )}
-          </Card>
         </>
       )}
     </div>
