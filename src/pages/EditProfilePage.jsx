@@ -10,7 +10,7 @@ import { AuthContext } from "react-oidc-context"; // Context to access authentic
 import { updateUserAttribute } from "aws-amplify/auth"; // AWS Amplify function to update user attributes
 import { useNavigate } from "react-router-dom";
 
-/* Contributers:  */
+/* Contributers: Somesh */
 
 export default function EditProfilePage() {
   const { name, email, getUserDetails } = useContext(AuthContext); // Extract user details and related methods from context
@@ -19,6 +19,7 @@ export default function EditProfilePage() {
   const navigate = useNavigate(); // Navigation function to redirect users.
 
   // Handles updating a user attribute via AWS Amplify.
+  // This is taken from: https://docs.amplify.aws/gen1/react/build-a-backend/auth/manage-user-profile/#update-user-attribute
   async function handleUpdateUserAttribute(attributeKey, value) {
     setLoading(true);
     try {

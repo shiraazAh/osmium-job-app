@@ -5,7 +5,7 @@ import { Empty, Flex, Pagination, Spin, message } from "antd";
 import "../styles.css";
 import { getParameters } from "../utils/helpers";
 
-/* Contributers: Oliver Glenn Craigie,  */
+/* Contributers: Oliver Glenn Craigie, Oisin (Job Card) */
 /* JobPagination is a component used to show pages of jobs based on information called from The Muse API,
   this component is used on the JobDetailsPage */
 
@@ -24,7 +24,7 @@ export default function JobPagination() {
 
   useEffect(() => {
     // Limiting pages to 99 made using the help of the LLM ChatGPT
-    // to use more then 99 pages need to use paid version of the API
+    // to use more then 99 pages need to use paid version of the themuse public API
     const fetchPage = async (pageNumber) => {
       if (pageNumber > 99) {
         message.error("Maximum of 99 pages of results reached");
@@ -37,6 +37,7 @@ export default function JobPagination() {
       try {
         const response = await fetch(
           // API is called to return pages of jobs with 20 jobs per page
+          // Public API documentation: https://www.themuse.com/developers/api/v2?ref=public_apis
           `https://www.themuse.com/api/public/jobs?page=${pageNumber}&per_page=20&${getParameters(
             // these are used for the job cards
             jobCategory, // type of skills/industry e.g Accountng

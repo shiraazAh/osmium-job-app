@@ -1,5 +1,6 @@
 
-
+// This is the ant design theme configuration of our projects design / colour scheme
+// Learnt from: https://ant.design/docs/react/customize-theme
 export const theme = {
 	components: {
 		Menu: {

@@ -1,4 +1,4 @@
-import { Card, Select, Button } from "antd";
+import { Card, Select, Button, message } from "antd";
 import { Input } from "antd";
 import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import EnvironmentOutlined from "@ant-design/icons/EnvironmentOutlined";
@@ -12,7 +12,7 @@ import "../styles.css";
 import jobData from "../utils/jobData.json";
 import { getParameters } from "../utils/helpers";
 
-/* Contributers: Shiraaz, Oliver,  */
+/* Contributers: Shiraaz, Oliver, Oisin */
 /* AllJobsPage allows user to search for jobs based on category, location and level and it also shows user 10 reccomeneded jobs  */
 
 const { Search } = Input;
@@ -21,7 +21,6 @@ export default function AllJobsPage() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [jobCategory, setJobCategory] = useState(null);
   const [jobLocation, setJobLocation] = useState(null);
@@ -29,9 +28,10 @@ export default function AllJobsPage() {
   const [buttonLoading, setButtonLoading] = useState(false);
 
   useEffect(() => {
+    //Fetch 10 jobs from themuse API
+    //Public API documentation: https://www.themuse.com/developers/api/v2?ref=public_apis
     const fetchPage = async (pageNumber) => {
       setIsLoading(true);
-      setError(null);
 
       try {
         const response = await fetch(
@@ -45,7 +45,7 @@ export default function AllJobsPage() {
         const fetchedData = await response.json();
         setData(fetchedData.results.slice(0, 10));
       } catch (error) {
-        setError(error.message);
+        message.error("Could not fetch data");
       } finally {
         setIsLoading(false);
       }
@@ -56,13 +56,9 @@ export default function AllJobsPage() {
 
   // search for jobs based on category, location and/or level
   const handleSearch = async () => {
+    setButtonLoading(true);
     navigate(`/jobs?${getParameters(jobCategory, jobLocation, jobLevel)}`);
   };
-
-  // function not used
-  // const handlePageChange = (pageNumber) => {
-  //   setPage(pageNumber);
-  // };
 
   const handleJobSelect = (jobId) => {
     // Navigate to the job details page using the job ID
@@ -76,6 +72,7 @@ export default function AllJobsPage() {
   return (
     <>
       <div className="position-relative">
+        {/* Top Header */}
         <CustomNavbar />
       </div>
       <h2 className="text-white mt-3 fw-bold">
@@ -83,16 +80,7 @@ export default function AllJobsPage() {
       </h2>
       <div className="d-flex justify-content-center mt-4">
         <Card className="shadow-sm" style={{ width: "100%", height: 240 }}>
-          {/*** Inputs ***/}
-          {/* <Input
-            placeholder="Search Job"
-            allowClear
-            size="large"
-            className="w-100 filter-inputs px-0 mb-2"
-            variant="borderless"
-            prefix={<SearchOutlined className="me-1" />}
-            style={{ width: 200 }}
-          /> */}
+          {/*** Search Inputs and search button ***/}
           <AutoCompleteSelect
             options={jobData.job_categories}
             icon={<SearchOutlined className="me-1" />}
@@ -130,6 +118,7 @@ export default function AllJobsPage() {
       <div className="mt-4 mb-5">
         <div className="d-flex flex-row justify-content-between align-items-center mb-2">
           <p className="font-weight-bold mb-0">Recomendations</p>
+          {/* See all button that takes you to the JobPagination page */}
           <Button onClick={handleSeeAllClick} type="link" className=" p-0">
             See All
           </Button>
@@ -157,7 +146,8 @@ export default function AllJobsPage() {
   );
 }
 
-// JobCategorySelect component with sorting
+// Reusable AutoComplete select component with sorting implemented
+// Taken from Ant design autocomplete select example
 const AutoCompleteSelect = ({
   options,
   icon,
