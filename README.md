@@ -1,6 +1,8 @@
 # Osmium Job App
 
-This is a app where user's can look and apply for new jobs. You can access the deployed version of the app here: https://osmium-job-tracker.netlify.app/
+This is a app where user's can look and apply for new jobs. You can access the deployed version of the app here: https://osmium-job-tracker.netlify.app/. 
+
+(The github repository link is: https://github.com/shiraazAh/osmium-job-app )
 
 ## Installation
 
