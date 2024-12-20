@@ -35,7 +35,7 @@ This is a app where user's can look and apply for new jobs. You can access the d
 # Project Contribution List
 
 - Oliver Glenn Craigie - JobPagination.jsx, JobCard.jsx, AllJobsPage.jsx, ApplicationSuccess.jsx, JobDetailsPage.jsx, AuthenticatedRoutes.jsx
-- Hema Lalitha Surya Somashekar Ganti - GradientButton.jsx, BottomBar.jsx, EditProfile.jsx, ProfilePage.jsx, AuthenticatedRoutes.jsx
+- Hema Lalitha Surya Somashekar Ganti - WelcomePage.jsx, GradientButton.jsx, BottomBar.jsx, EditProfile.jsx, ProfilePage.jsx, AuthenticatedRoutes.jsx
 - Oisin Stephen Dillon - JobPagination.jsx, Navbar.jsx, JobCard.jsx, MyApplicationCard.jsx, AllJobsPage.jsx
 - Shiraaz Ahammed - All Backend work (AWS Cognito, DyanamoDB & API Creation), Main.jsx, App.jsx, AuthenticatedRoutes.jsx, MyApplicationsPage.jsx, BottomBar.jsx, AllJobsPage.jsx, ProfilePage.jsx, SecondaryButton.jsx
 
